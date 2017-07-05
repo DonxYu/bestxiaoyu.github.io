@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,57 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-hexo-next-sidebar" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/04/hexo-next-sidebar/" class="article-date">
+  <time datetime="2016-02-04T12:17:52.000Z" itemprop="datePublished">2016-02-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/04/hexo-next-sidebar/">Hexo NexT侧边栏Sidebar配置自动展开教程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>最新版的NexT不能自动展开侧边栏,_config.yml文件修改sitebar:always修改了也没有效果<br>网上搜了一圈，作者本人给出的答复也并没有作用。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -rl <span class="string">'displaySidebar'</span> next主题路径</div></pre></td></tr></table></figure>
+<h4 id="首页修改"><a href="#首页修改" class="headerlink" title="首页修改"></a>首页修改</h4><p>/next/source/js/src/motion.js<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sidebar: <span class="function"><span class="keyword">function</span> <span class="params">(integrator)</span> </span>&#123;</div><div class="line">     <span class="comment">//if (CONFIG.sidebar === 'always') &#123;  //注释</span></div><div class="line">       NexT.utils.displaySidebar();</div><div class="line">     <span class="comment">//&#125;  //注释</span></div><div class="line">     integrator.next();</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<h4 id="内页修改"><a href="#内页修改" class="headerlink" title="内页修改"></a>内页修改</h4><p>/next/layout/_scripts/pages/post-details.swig<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// if (CONFIG.sidebar === 'post') &#123;  //注释</span></div><div class="line">      <span class="keyword">if</span> ($tocContent.length &gt; <span class="number">0</span> &amp;&amp; $tocContent.html().trim().length &gt; <span class="number">0</span>) &#123;</div><div class="line">       	NexT.utils.displaySidebar();</div><div class="line">      &#125;  </div><div class="line">   <span class="comment">// &#125;  //注释</span></div></pre></td></tr></table></figure></p>
+<p>hexo d -g部署即可。</p>
+<hr>
+<blockquote>
+<p>微信扫一扫，请博主喝杯咖啡.<br><img src="http://cdn.bestxiaoyu.com/images%2Fcoffee.png?imageView2/1/w/200/h/200/q/75" alt="微信扫一扫，请博主喝杯咖啡."></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/04/hexo-next-sidebar/" data-id="cj4quikwd000dne5st8c9kd8m" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/next/">next</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sidebar/">sidebar</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-high-availability-systems-dianping" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -133,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/04/high-availability-systems-dianping/" data-id="cj4quikwf000fne5s0g9mlgcy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/04/high-availability-systems-dianping/" data-id="cj4quikwf000fne5s0g9mlgcy" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -191,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/02/gee-shadowsocks/" data-id="cj4quikw00006ne5sk4cxo3gv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/02/gee-shadowsocks/" data-id="cj4quikw00006ne5sk4cxo3gv" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vps/">Vps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/极路由/">极路由</a></li></ul>
@@ -239,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/02/us-tv-series/" data-id="cj4quikxc001fne5s3s8u7nq2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/02/us-tv-series/" data-id="cj4quikxc001fne5s3s8u7nq2" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Movie/">Movie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TV/">TV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/美剧/">美剧</a></li></ul>
@@ -283,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/10/xiaolinyicha/" data-id="cj4quikxi001nne5s90v3qidi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/10/xiaolinyicha/" data-id="cj4quikxi001nne5s90v3qidi" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/词/">词</a></li></ul>
@@ -352,7 +403,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/09/web-download/" data-id="cj4quikxg001lne5s4mhalui8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/09/web-download/" data-id="cj4quikxg001lne5s4mhalui8" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -465,7 +516,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/10/performance-tuning-pattern/" data-id="cj4quikwr000une5stfssc83d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/10/performance-tuning-pattern/" data-id="cj4quikwr000une5stfssc83d" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -521,7 +572,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/04/dropbox-shadowsocks/" data-id="cj4quikvy0005ne5srk5klb3l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/04/dropbox-shadowsocks/" data-id="cj4quikvy0005ne5srk5klb3l" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dropbox/">Dropbox</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vps/">Vps</a></li></ul>
@@ -591,7 +642,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/03/vultr-shdowsocks-Debian/" data-id="cj4quikxf001jne5sclnsgfry" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/03/vultr-shdowsocks-Debian/" data-id="cj4quikxf001jne5sclnsgfry" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Debian/">Debian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vps/">Vps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vultr/">Vultr</a></li></ul>
@@ -750,72 +801,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/03/hacking/" data-id="cj4quikw20008ne5soovaacul" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/03/hacking/" data-id="cj4quikw20008ne5soovaacul" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安全/">安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/黑客/">黑客</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-meeting" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/30/meeting/" class="article-date">
-  <time datetime="2015-11-30T09:11:46.000Z" itemprop="datePublished">2015-11-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Work/">Work</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/30/meeting/">我的开会法则</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&lt;转:道哥的黑板报&gt;<br>在2010年的夏天，我有幸作为集团工程师的代表之一和马云一起共进午餐 — 吃盒饭。当时是提前一天通知我过去蹭饭的，所以也没有准备类似「中国商业的未来在哪里」之类的高大上的问题。我记得我当时问了一个问题，觉得现在公司会议太多，而且效率很低，问他有没有什么办法？</p>
-<p>马云和一众老板们都深以为然。当时他给出了个招，准备一个闹钟放在会议室里，定好时间，时间一到准时散会，绝不拖堂。</p>
-<p>这招听起来就不怎么靠谱，不解决问题，也没见人用过，感觉是个歪招，所以后来我也就一直没有实行。</p>
-<p>这么多年下来，我的会更多了，倒不是因为效率变低，而是现在的工作内容已经不仅仅是做技术，是带领了一块业务，我没法让自己闲下来。</p>
-<p>今年4月份我去Facebook参观的时候，听说他们的工程师有一个「No Meeting Day」，每周有一天可以拒绝开会（特别紧急的除外）。当时我听了就觉得特别好，回来就想推行。结果回来很兴奋的和工程师们一说后，发现真正一线的研发工程师每周的会也不是特别的多，用处不大。而真正需要减负的是在一线主管和经理们的身上，但他们的会议一般又很难推掉，所以这招也不是很实用。</p>
-<p>既然会议不可避免，那就想想怎么高效的开会吧，在这一点上，我现在已经颇有心得了。</p>
-<p>高效开会的前提是纪律。开会时请务必保证每个人都全身心参与，否则就是在浪费大家的时间。因此我主持的会议，有两条很严格的规定，一是最多只允许开两台电脑，一台是做会议纪要的，一台是投胶片的主讲人用的，其他人的电脑一律不许开；二是不允许接听电话，如果有很重要的电话非接不可，那就先主动交罚款后再接听。</p>
-<p>以往我参加一些会议，很多时候一进会议室就发现每个人桌子上都开着一台电脑，这样的会议基本上都是在扯淡。因为只要仔细观察，就会发现开会时这些人要么是在用IM聊天，要么就是在处理邮件，反正不是在开会。本来10分钟能解决的会议，都能拖成一个小时。所以我一般会要求所有人把电脑合上，没有东西分散注意力了，就逼着大家都把精力花在会议讨论的问题上，一般会议都能很快结束。</p>
-<p>另外一种很恶劣的情况是大家不玩电脑了，都开始玩手机。这种现象现在也比比皆是。所以如果要做的更好一点，应该要求大家把手机都掏出来，摆在桌子上，也都别玩了，有谁想捡起来玩还会特别显眼。</p>
-<p>在会议过程中接听电话也是我很痛恨的，一般会打断整个会议的进程，让所有人都停下来等他，这是在浪费所有人的时间。所以我会要求会议过程中不允许接听电话，如果真出了天大的事情要接，就先交罚款（一般被用来买水果）再接，以示对大家的尊重和补偿。</p>
-<p>也因此，在我经常挂断别人的电话，也包括老板的。</p>
-<p>除了这些简单的措施外，在会议中能收能放才是最重要的，这就看每个人的功底了。</p>
-<p>每场会议都应该有一个重要的角色能够主导会议的走向，一般是会议主持人或者关键决策人。他要能够在关键的时候或收或放，打断没有重点的废话或过度的发散，或是让关键的人出来充分的表达观点，或是随时把需要加入的关键人员从外面拽进会议。总之，是尽一切可能把会议引导向高效决策的方向。</p>
-<p>会议主持人要能及时打断所有开小会的人，一旦发现有人在交头接耳，要毫不犹豫的禁止。开小会无异于走神。在一个会议上，有事情应该讲出来让所有人参与讨论和发表意见，如果真有私下里要说的，可以会后再单独谈，一定不要用交头接耳的方式，这也属于浪费所有人的时间。</p>
-<p>开会是为了做出决策，在很多时候不应该发散性的讨论问题，那是会前应该做好的准备工作。头脑风暴一类的会议，看似很好，实际上漫无目的，很容易过于发散，最后没有结论。开过几次头脑风暴类的会议而没有结论后，很容易把大家都开伤，再也不敢开会了。</p>
-<p>马云前不久在组织部大会上讲，他进会议室前一般只有两种状态，一种是心里已经有了答案，只是来听听大家的意见；另一种是心里没有答案，来听听大家的想法和讨论。后一种会议，基本上进会议室时是什么状态，出来的时候还是什么状态。</p>
-<p>开会的另一个目的，是为了达到充分的沟通。因此学会聆听很重要。我们每个人往往都急于表达自己的观点，说服他人而不是被他人说服。如果有人把想法憋在心里不说出来，不沟通，最后在执行层面就可能会变形。这样的人越多，执行起来就越走样。</p>
-<p>所以一次成功的会议应该让每个人能有机会充分表达自己的想法，尽量听人把话说完。可以采取的一种技巧是让每个人轮流表达一下自己的观点，这样可以提供机会让那些不想开口的人说话，避免他们把问题带回去。据我观察这样的人往往不在少数。</p>
-<p>让想法达成一致的会议，我们称之为「对焦」。在阿里，每年年初都会有一系列战略对焦的会议，让上下层员工、协同、合作部门在目标和想法上达成一致。人类社会太复杂了，每个人身处自己的位置都会有自己的想法和局限性，所以对焦很重要。</p>
-<p>我们每天的工作大多数时候都在会议或会谈中进行，如果不把会议利用好，提高效率，那就是在浪费生命。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/30/meeting/" data-id="cj4quikwj000kne5sz9qjjonl" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Meeting/">Meeting</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Work/">Work</a></li></ul>
 
     </footer>
   </div>
@@ -835,7 +824,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Objective-C/">Objective-C</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vps/">Vps</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能/">性能</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能优化/">性能优化</a></li></ul>
     </div>
@@ -845,7 +834,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Books/">Books</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Digitalocean/">Digitalocean</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dropbox/">Dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FinalSpeed/">FinalSpeed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meeting/">Meeting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vps/">Vps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vultr/">Vultr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/">Work</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/">next</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sidebar/">sidebar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后端开发/">后端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/极路由/">极路由</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美剧/">美剧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动发布/">自动发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/词/">词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑客/">黑客</a></li></ul>
     </div>
@@ -855,7 +844,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/Books/" style="font-size: 10px;">Books</a> <a href="/tags/Debian/" style="font-size: 10px;">Debian</a> <a href="/tags/Digitalocean/" style="font-size: 10px;">Digitalocean</a> <a href="/tags/Dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tags/FinalSpeed/" style="font-size: 10px;">FinalSpeed</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/Meeting/" style="font-size: 10px;">Meeting</a> <a href="/tags/Movie/" style="font-size: 10px;">Movie</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Shadowsocks/" style="font-size: 16.67px;">Shadowsocks</a> <a href="/tags/TV/" style="font-size: 10px;">TV</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Vps/" style="font-size: 20px;">Vps</a> <a href="/tags/Vultr/" style="font-size: 10px;">Vultr</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/next/" style="font-size: 10px;">next</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/sidebar/" style="font-size: 10px;">sidebar</a> <a href="/tags/后端开发/" style="font-size: 10px;">后端开发</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/极路由/" style="font-size: 10px;">极路由</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a> <a href="/tags/美剧/" style="font-size: 10px;">美剧</a> <a href="/tags/自动发布/" style="font-size: 10px;">自动发布</a> <a href="/tags/词/" style="font-size: 10px;">词</a> <a href="/tags/黑客/" style="font-size: 10px;">黑客</a>
     </div>
@@ -866,7 +855,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li></ul>
     </div>
   </div>
 
@@ -874,9 +863,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/06/14/你不是Google，一语点醒技术人/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2016/03/05/spark/">Spark：一个高效的分布式计算系统</a>
@@ -894,10 +887,6 @@
             <a href="/2016/02/28/mac-ubuntu-finalspeed/">FinalSpeed搭建配置</a>
           </li>
         
-          <li>
-            <a href="/2016/02/25/python-mysql/">Python操作Mysql</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -911,7 +900,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

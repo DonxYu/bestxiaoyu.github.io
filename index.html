@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,40 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-你不是Google，一语点醒技术人" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/14/你不是Google，一语点醒技术人/" class="article-date">
+  <time datetime="2017-06-14T06:15:11.000Z" itemprop="datePublished">2017-06-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="你不是Google，一语点醒技术人"><a href="#你不是Google，一语点醒技术人" class="headerlink" title="你不是Google，一语点醒技术人"></a>你不是Google，一语点醒技术人</h1><p>软件工程师总是着迷于荒唐古怪的事。我们看起来似乎很理性，但在面对技术选型时，总是陷入抓狂——从 Hacker News 到各种博客，像一只飞蛾一样，来回折腾，最后精疲力尽，无助地飞向一团亮光，跪倒在它的前面——那就是我们一直在寻找的东西。<br>真正理性的人不是这样做决定的。不过工程师一贯如此，比如决定是否使用 MapReduce。<br>Joe Hellerstein 在他的大学数据库教程视频中说道：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">世界上只有差不多 5 个公司需要运行这么大规模的作业。至于其他公司……他们使用了所有的 IO 来实现不必要的容错。在 2000 年代，人们狂热地追随着 Google：“我们要做 Google 做过的每一件事，因为我们也运行着世界上最大的互联网数据服务。”</div></pre></td></tr></table></figure></p>
+<p>超出实际需求的容错没有什么问题，但我们却为此付出了的惨重的代价：不仅增加了 IO，还有可能让原先成熟的系统——包含了事务、索引和查询优化器——变得破碎不堪。这是一个多么严重的历史倒退！有多少个 Hadoop 用户是有意识地做出这种决定的？有多少人知道他们的决定到底是不是一个明智之举？<br>MapReduce 已经成为一个众矢之的，那些盲目崇拜者也意识到事情不对劲。但这种情况却普遍存在：虽然你使用了大公司的技术，但你的情况却与他们大不一样，而且你的决定并没有经过深思熟虑，你只是习以为常地认为，模仿巨头公司就一定也能给你带来同样的财富。<br>是的，这又是一篇劝大家“不要盲目崇拜”的文章。不过这次我列出了一长串有用的清单，或许能够帮助你们做出更好的决定。</p>
+<p><strong>很酷的技术？UNPHAT</strong><br>如果你还在使用 Google 搜索新技术来重建你的软件架构，那么我建议你不要再这么做了。相反，你可以考虑应用 UNPHAT 原则。<br>    1    在彻底了解（<strong>Understand</strong>）你的问题之前，不要急着去寻找解决方案。你的目标应该是在问题领域内“解决”问题，而不是在方案领域内解决问题。<br>    2    列出（<strong>eNumerate</strong>）多种方案，不要只把眼睛盯在你最喜欢的方案上。<br>    3    选择一个候选方案，并阅读相关论文（<strong>Paper</strong>）。<br>    4    了解候选方案的产生背景（<strong>Historical context</strong>）。<br>    5    比较优点（<strong>Advantages</strong>）和缺点，扬长避短。<br>    6    思考（<strong>Think</strong>）！冷静地思考候选方案是否适合用于解决你的问题。要出现怎样异常的情况才会让你改变注意？例如，数据要少到什么程度才会让你打消使用 Hadoop 的念头？</p>
+<p><strong>你不是 Amazon</strong><br>UNPHAT 原则十分直截了当。最近我与一个公司有过一次对话，这个公司打算在一个读密集的系统里使用 Cassandra，他们的数据是在夜间加载到系统里的。<br>他们阅读了 Dynamo 的相关论文，并且知道 Cassandra 是最接近 Dynamo 的一个产品。我们知道，这些分布式数据库优先保证写可用性（Amazon 是不会让“添加到购物车”这种操作出现失败的）。为了达到这个目的，他们在一致性以及几乎所有在传统 RDBMS 中出现过的特性上做出了妥协。但这家公司其实没有必要优先考虑写可用性，因为他们每天只有一次写入操作，只是数据量比较大。<br>他们之所以考虑使用 Cassandra，是因为 PostgreSQL 查询需要耗费几分钟的时间。他们认为是硬件的问题，经过排查，我们发现数据表里有 5000 万条数据，每条数据最多 80 个字节。如果从 SSD 上整块地读取所有数据大概需要 5 秒钟，这个不算快，但比起实际的查询，它要快上两个数量级。<br>我真的很想多问他们几个问题（了解问题！），在问题变得愈加严重时，我为他们准备了 5 个方案（列出多个候选方案！），不过很显然，Cassandra 对于他们来说完全是一个错误的方案。他们只需要耐心地做一些调优，比如对部分数据重新建模，或许可以考虑使用（当然也有可能没有）其他技术……但一定不是这种写高可用的键值存储系统，Amazon 当初创建 Cassandra 是用来解决他们的购物车问题的！</p>
+<p><strong>你不是 LinkedIn</strong><br>我发现一个学生创办的小公司居然在他们的系统里使用 Kafka，这让我感到很惊讶。因为据我所知，他们每天只有很少的事务需要处理——最好的情况下，一天最多只有几百个。这样的吞吐量几乎可以直接记在记事本上。<br>Kafka 被设计用于处理 LinkedIn 内部的吞吐量，那可是一个天文数字。即使是在几年前，这个数字已经达到了每天数万亿，在高峰时段每秒钟需要处理 1000 万个消息。不过 Kafka 也可以用于处理低吞吐量的负载，或许再低 10 个数量级？<br>或许工程师们在做决定时确实是基于他们的预期需求，并且也很了解 Kafka 的适用场景。但我猜测他们是抵挡不住社区对 Kafka 的追捧，并没有仔细想过 Kafka 是否适合他们。要知道，那可是 10 个数量级的差距！</p>
+<p><strong>再一次，你不是 Amazon</strong><br>比 Amazon 的分布式数据库更为著名的是它的可伸缩架构模式，也就是面向服务架构。Werner Vogels 在 2006 年的一次访谈中指出，Amazon 在 2001 年时就意识到他们的前端需要横向伸缩，而面向服务架构有助于他们实现前端伸缩。工程师们面面相觑，最后只有少数几个工程师着手去做这件事情，而几乎没有人愿意将他们的静态网页拆分成小型的服务。<br>不过 Amazon 还是决定向 SOA 转型，他们当时有 7800 个员工和 30 亿美元的销售规模。<br>当然，并不是说你也要等到有 7800 个员工的时候才能转向 SOA……只是你要多想想，它真的能解决你的问题吗？你的问题的根源是什么？可以通过其他的方式解决它们吗？<br>如果你告诉我说，你那 50 个人的公司打算转向 SOA，那么我不禁感到疑惑：为什么很多大型的公司仍然在乐此不彼地使用具有模块化的大型单体应用？</p>
+<p><strong>甚至 Google 也不是 Google</strong><br>使用 Hadoop 和 Spark 这样的大规模数据流引擎会非常有趣，但在很多情况下，传统的 DBMS 更适合当前的负载，有时候数据量小到可以直接放进内存。你是否愿意花 10,000 美金去购买 1TB 的内存？如果你有十亿个用户，每个用户仅能使用 1KB 的内存，所以你的投入远远不够。<br>或许你的负载大到需要把数据写回磁盘。那么你需要多少磁盘？你到底有多少数据量？Google 之所以要创建 GFS 和 MapReduce，是要解决整个 Web 的计算问题，比如重建整个 Web 的搜索索引。<br>或许你已经阅读过 GFS 和 MapReduce 的论文，Google 的部分问题在于吞吐量，而不是容量，他们之所以需要分布式的存储，是因为从磁盘读取字节流要花费太多的时间。那么你在 2017 年需要使用多少设备吞吐量？你一定不需要像 Google 那么大的吞吐量，所以你可能会考虑使用更好的设备。如果都用上 SSD 会给你增加多少成本？<br>或许你还想要伸缩性。但你有仔细算过吗，你的数据增长速度会快过 SSD 降价的速度吗？在你的数据撑爆所有的机器之前，你的业务会有多少增长？截止 2016 年，Stack Exchange 每天要处理 2 亿个请求，但是他们只用了 4 个 SQL Server，一个用于 Stack Overflow，一个用于其他用途，另外两个作为备份复本。<br>或许你在应用 UNPHAT 原则之后，仍然决定要使用 Hadoop 或 Spark。或许你的决定是对的，但关键的是你要用对工具。Google 非常明白这个道理，当他们意识到 MapReduce 不再适合用于构建索引之后，他们就不再使用它。</p>
+<p><strong>先了解你的问题</strong><br>我所说的也不是什么新观点，不过或许 UNPHAT 对于你们来说已经足够了。如果你觉得还不够，可以听听 Rich Hickey 的演讲“吊床驱动开发（Hammock Driven Development）”，或者看看 Polya 的书《How to Solve It》， 或者学习一下 Hamming 的课程“The Art of Doing Science and Engineering”。我恳请你们一定要多思考！在尝试解决问题之前先对它们有充分的了解。最后送上 Polya 的一个金句名言：<br>回答一个你不了解的问题是愚蠢的，到达一个你不期望的终点是悲哀的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/14/你不是Google，一语点醒技术人/" data-id="cj4quyriu0000wj5sm2xuqp38" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-spark" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -320,7 +354,7 @@ result.saveAsTextFile(hdfsPath + args(2))
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/05/spark/" data-id="cj4quikx9001cne5s892c0rmn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/05/spark/" data-id="cj4quikx9001cne5s892c0rmn" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -485,7 +519,7 @@ result.saveAsTextFile(hdfsPath + args(2))
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/05/docker-develop/" data-id="cj4quikvq0003ne5s7691wfo7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/05/docker-develop/" data-id="cj4quikvq0003ne5s7691wfo7" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -552,7 +586,7 @@ result.saveAsTextFile(hdfsPath + args(2))
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/05/norm/" data-id="cj4quikwl000nne5sgybfp0oy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/05/norm/" data-id="cj4quikwl000nne5sgybfp0oy" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -605,7 +639,7 @@ result.saveAsTextFile(hdfsPath + args(2))
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/28/mac-ubuntu-finalspeed/" data-id="cj4quikwh000ine5s0ber008t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/28/mac-ubuntu-finalspeed/" data-id="cj4quikwh000ine5s0ber008t" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FinalSpeed/">FinalSpeed</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vps/">Vps</a></li></ul>
@@ -656,7 +690,7 @@ result.saveAsTextFile(hdfsPath + args(2))
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/25/python-mysql/" data-id="cj4quikwy0014ne5sfixwn4tp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/25/python-mysql/" data-id="cj4quikwy0014ne5sfixwn4tp" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
@@ -730,7 +764,7 @@ result.saveAsTextFile(hdfsPath + args(2))
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/24/digitalocean-ubuntu-shdowsocks/" data-id="cj4quikvi0001ne5syjdzpyp8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/24/digitalocean-ubuntu-shdowsocks/" data-id="cj4quikvi0001ne5syjdzpyp8" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Digitalocean/">Digitalocean</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vps/">Vps</a></li></ul>
@@ -784,7 +818,7 @@ result.saveAsTextFile(hdfsPath + args(2))
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/23/python-douban-movies-pic/" data-id="cj4quikwv0011ne5s1tbz6e29" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/23/python-douban-movies-pic/" data-id="cj4quikwv0011ne5s1tbz6e29" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
@@ -830,7 +864,7 @@ result.saveAsTextFile(hdfsPath + args(2))
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/23/python-spider/" data-id="cj4quikx20016ne5s8p90u21k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/23/python-spider/" data-id="cj4quikx20016ne5s8p90u21k" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
@@ -876,61 +910,10 @@ result.saveAsTextFile(hdfsPath + args(2))
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/19/hexo-ftp/" data-id="cj4quikw8000bne5svoehsef3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/19/hexo-ftp/" data-id="cj4quikw8000bne5svoehsef3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ftp/">ftp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自动发布/">自动发布</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hexo-next-sidebar" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/04/hexo-next-sidebar/" class="article-date">
-  <time datetime="2016-02-04T12:17:52.000Z" itemprop="datePublished">2016-02-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/04/hexo-next-sidebar/">Hexo NexT侧边栏Sidebar配置自动展开教程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>最新版的NexT不能自动展开侧边栏,_config.yml文件修改sitebar:always修改了也没有效果<br>网上搜了一圈，作者本人给出的答复也并没有作用。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -rl <span class="string">'displaySidebar'</span> next主题路径</div></pre></td></tr></table></figure>
-<h4 id="首页修改"><a href="#首页修改" class="headerlink" title="首页修改"></a>首页修改</h4><p>/next/source/js/src/motion.js<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sidebar: <span class="function"><span class="keyword">function</span> <span class="params">(integrator)</span> </span>&#123;</div><div class="line">     <span class="comment">//if (CONFIG.sidebar === 'always') &#123;  //注释</span></div><div class="line">       NexT.utils.displaySidebar();</div><div class="line">     <span class="comment">//&#125;  //注释</span></div><div class="line">     integrator.next();</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
-<h4 id="内页修改"><a href="#内页修改" class="headerlink" title="内页修改"></a>内页修改</h4><p>/next/layout/_scripts/pages/post-details.swig<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// if (CONFIG.sidebar === 'post') &#123;  //注释</span></div><div class="line">      <span class="keyword">if</span> ($tocContent.length &gt; <span class="number">0</span> &amp;&amp; $tocContent.html().trim().length &gt; <span class="number">0</span>) &#123;</div><div class="line">       	NexT.utils.displaySidebar();</div><div class="line">      &#125;  </div><div class="line">   <span class="comment">// &#125;  //注释</span></div></pre></td></tr></table></figure></p>
-<p>hexo d -g部署即可。</p>
-<hr>
-<blockquote>
-<p>微信扫一扫，请博主喝杯咖啡.<br><img src="http://cdn.bestxiaoyu.com/images%2Fcoffee.png?imageView2/1/w/200/h/200/q/75" alt="微信扫一扫，请博主喝杯咖啡."></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/04/hexo-next-sidebar/" data-id="cj4quikwd000dne5st8c9kd8m" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/next/">next</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sidebar/">sidebar</a></li></ul>
 
     </footer>
   </div>
@@ -950,7 +933,7 @@ result.saveAsTextFile(hdfsPath + args(2))
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Objective-C/">Objective-C</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vps/">Vps</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能/">性能</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能优化/">性能优化</a></li></ul>
     </div>
@@ -960,7 +943,7 @@ result.saveAsTextFile(hdfsPath + args(2))
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Books/">Books</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Digitalocean/">Digitalocean</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dropbox/">Dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FinalSpeed/">FinalSpeed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meeting/">Meeting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vps/">Vps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vultr/">Vultr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/">Work</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/">next</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sidebar/">sidebar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后端开发/">后端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/极路由/">极路由</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美剧/">美剧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动发布/">自动发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/词/">词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑客/">黑客</a></li></ul>
     </div>
@@ -970,7 +953,7 @@ result.saveAsTextFile(hdfsPath + args(2))
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/Books/" style="font-size: 10px;">Books</a> <a href="/tags/Debian/" style="font-size: 10px;">Debian</a> <a href="/tags/Digitalocean/" style="font-size: 10px;">Digitalocean</a> <a href="/tags/Dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tags/FinalSpeed/" style="font-size: 10px;">FinalSpeed</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/Meeting/" style="font-size: 10px;">Meeting</a> <a href="/tags/Movie/" style="font-size: 10px;">Movie</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Shadowsocks/" style="font-size: 16.67px;">Shadowsocks</a> <a href="/tags/TV/" style="font-size: 10px;">TV</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Vps/" style="font-size: 20px;">Vps</a> <a href="/tags/Vultr/" style="font-size: 10px;">Vultr</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/next/" style="font-size: 10px;">next</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/sidebar/" style="font-size: 10px;">sidebar</a> <a href="/tags/后端开发/" style="font-size: 10px;">后端开发</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/极路由/" style="font-size: 10px;">极路由</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a> <a href="/tags/美剧/" style="font-size: 10px;">美剧</a> <a href="/tags/自动发布/" style="font-size: 10px;">自动发布</a> <a href="/tags/词/" style="font-size: 10px;">词</a> <a href="/tags/黑客/" style="font-size: 10px;">黑客</a>
     </div>
@@ -981,7 +964,7 @@ result.saveAsTextFile(hdfsPath + args(2))
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li></ul>
     </div>
   </div>
 
@@ -989,9 +972,13 @@ result.saveAsTextFile(hdfsPath + args(2))
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/06/14/你不是Google，一语点醒技术人/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2016/03/05/spark/">Spark：一个高效的分布式计算系统</a>
@@ -1009,10 +996,6 @@ result.saveAsTextFile(hdfsPath + args(2))
             <a href="/2016/02/28/mac-ubuntu-finalspeed/">FinalSpeed搭建配置</a>
           </li>
         
-          <li>
-            <a href="/2016/02/25/python-mysql/">Python操作Mysql</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1026,7 +1009,7 @@ result.saveAsTextFile(hdfsPath + args(2))
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
