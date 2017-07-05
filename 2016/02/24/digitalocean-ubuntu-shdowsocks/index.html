@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Digitalocean Ubuntu系统搭建Shadowsocks | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="注册1Digitalocean打开需要梯子 用下面链接注册送10美刀https://m.do.co/c/0b957635d6aa Create Droplet注册完成之后进入Digitalocean首页 右上角Create Droplet  选择Ubuntu系统 14.04系统  选择自己需要的套餐 个人用的话$5就够了  机房地址选择，San Francisco比较稳定，速度相对也较快，推荐">
+<meta name="keywords" content="Vps,Digitalocean,Shadowsocks,Ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Digitalocean Ubuntu系统搭建Shadowsocks">
+<meta property="og:url" content="http://yoursite.com/2016/02/24/digitalocean-ubuntu-shdowsocks/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="注册1Digitalocean打开需要梯子 用下面链接注册送10美刀https://m.do.co/c/0b957635d6aa Create Droplet注册完成之后进入Digitalocean首页 右上角Create Droplet  选择Ubuntu系统 14.04系统  选择自己需要的套餐 个人用的话$5就够了  机房地址选择，San Francisco比较稳定，速度相对也较快，推荐">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/QQ20160224-0@2x.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/QQ20160224-1@2x.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/QQ20160224-2@2x.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/QQ20160224-3@2x.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/QQ20160224-4@2x.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/QQ20160224-5@2x.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/QQ20160224-6@2x.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images%2Fcoffee.png?imageView2/1/w/200/h/200/q/75">
+<meta property="og:updated_time" content="2016-02-24T10:59:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Digitalocean Ubuntu系统搭建Shadowsocks">
+<meta name="twitter:description" content="注册1Digitalocean打开需要梯子 用下面链接注册送10美刀https://m.do.co/c/0b957635d6aa Create Droplet注册完成之后进入Digitalocean首页 右上角Create Droplet  选择Ubuntu系统 14.04系统  选择自己需要的套餐 个人用的话$5就够了  机房地址选择，San Francisco比较稳定，速度相对也较快，推荐">
+<meta name="twitter:image" content="http://cdn.bestxiaoyu.com/images/QQ20160224-0@2x.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-digitalocean-ubuntu-shdowsocks" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/24/digitalocean-ubuntu-shdowsocks/" class="article-date">
+  <time datetime="2016-02-24T10:19:38.000Z" itemprop="datePublished">2016-02-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Vps/">Vps</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Digitalocean Ubuntu系统搭建Shadowsocks
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Digitalocean打开需要梯子</div></pre></td></tr></table></figure>
+<p><font color="red">用下面链接注册送10美刀</font><br><a href="https://m.do.co/c/0b957635d6aa" target="_blank" rel="external">https://m.do.co/c/0b957635d6aa</a></p>
+<h4 id="Create-Droplet"><a href="#Create-Droplet" class="headerlink" title="Create Droplet"></a>Create Droplet</h4><p>注册完成之后进入Digitalocean首页 右上角Create Droplet<br><img src="http://cdn.bestxiaoyu.com/images/QQ20160224-0@2x.png" alt=""></p>
+<hr>
+<p>选择Ubuntu系统 14.04系统<br><img src="http://cdn.bestxiaoyu.com/images/QQ20160224-1@2x.png" alt=""></p>
+<hr>
+<p>选择自己需要的套餐 个人用的话$5就够了<br><img src="http://cdn.bestxiaoyu.com/images/QQ20160224-2@2x.png" alt=""></p>
+<hr>
+<p>机房地址选择，San Francisco比较稳定，速度相对也较快，推荐<br><img src="http://cdn.bestxiaoyu.com/images/QQ20160224-3@2x.png" alt=""></p>
+<hr>
+<p>hostname自己随意填吧<br><img src="http://cdn.bestxiaoyu.com/images/QQ20160224-4@2x.png" alt=""></p>
+<hr>
+<p>存储公钥，没有公钥的话每次登陆需要输入密码，密码DO的邮件里会体现<br>公钥生成方式: 打开终端或者putty<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen</div></pre></td></tr></table></figure></p>
+<p>vim ~/.ssh/id_rsa.pub 复制里面内容放进SSH Key content保存</p>
+<hr>
+<p><img src="http://cdn.bestxiaoyu.com/images/QQ20160224-5@2x.png" alt=""></p>
+<p>到此配置已完成，点Create吧。</p>
+<h4 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h4><p>接下来终端或者putty登陆VPS<br><img src="http://cdn.bestxiaoyu.com/images/QQ20160224-6@2x.png" alt=""></p>
+<hr>
+<p>复制一下命令安装shadowsocks<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get update</div><div class="line">apt–get install python–gevent python–pip</div><div class="line">pip install shadowsocks</div></pre></td></tr></table></figure></p>
+<p>接下来配置也比较简单，新建一个 config.json，或者其他名字的都行，位置可以放在/etc/下（默认没有这个文件，你要自己创建一个），或者home或者其他任何地方。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"server"</span>:<span class="string">"你的服务器地址"</span>,	</div><div class="line">    <span class="string">"server_port"</span>:<span class="number">8888</span>,</div><div class="line">    <span class="string">"local_address"</span>: <span class="string">"127.0.0.1"</span>,</div><div class="line">    <span class="string">"local_port"</span>:<span class="number">1080</span>,</div><div class="line">    <span class="string">"password"</span>:<span class="string">"你的密码"</span>,</div><div class="line">    <span class="string">"timeout"</span>:<span class="number">300</span>,</div><div class="line">    <span class="string">"method"</span>:<span class="string">"aes-256-cfb"</span>,</div><div class="line">    <span class="string">"fast_open"</span>: <span class="keyword">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="配置解读"><a href="#配置解读" class="headerlink" title="配置解读"></a>配置解读</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">server 服务器 IP (IPv4/IPv6)，注意这也将是服务端监听的 IP 地址</div><div class="line">server_port 服务器端口</div><div class="line">local_port 本地端端口</div><div class="line">password 用来加密的密码</div><div class="line">timeout 超时时间（秒）</div><div class="line">method 加密方法，可选择“bf-cfb”,“aes-256-cfb”,“des-cfb”,“rc4”,等等。默认是一种不安全的加密，推荐用“aes-256-cfb”</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup ssserver -c /etc/shadowsocks.json &gt; log &amp;</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="配置开机自启动"><a href="#配置开机自启动" class="headerlink" title="配置开机自启动"></a>配置开机自启动</h4><p>然后可以配置开机自启动，添加到 /etc/rc.local<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/bin/ssserver –c /etc/shadowsocks.json</div></pre></td></tr></table></figure></p>
+<hr>
+<blockquote>
+<p>微信扫一扫，请博主喝杯咖啡.<br><img src="http://cdn.bestxiaoyu.com/images%2Fcoffee.png?imageView2/1/w/200/h/200/q/75" alt="微信扫一扫，请博主喝杯咖啡."></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/24/digitalocean-ubuntu-shdowsocks/" data-id="cj4quikvi0001ne5syjdzpyp8" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Digitalocean/">Digitalocean</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vps/">Vps</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/25/python-mysql/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Python操作Mysql
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/23/python-douban-movies-pic/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Python网络爬虫(二) - 爬取豆瓣电影图片</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Objective-C/">Objective-C</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vps/">Vps</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能/">性能</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能优化/">性能优化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Books/">Books</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Digitalocean/">Digitalocean</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dropbox/">Dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FinalSpeed/">FinalSpeed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meeting/">Meeting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vps/">Vps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vultr/">Vultr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/">Work</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/">next</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sidebar/">sidebar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后端开发/">后端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/极路由/">极路由</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美剧/">美剧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动发布/">自动发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/词/">词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑客/">黑客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Books/" style="font-size: 10px;">Books</a> <a href="/tags/Debian/" style="font-size: 10px;">Debian</a> <a href="/tags/Digitalocean/" style="font-size: 10px;">Digitalocean</a> <a href="/tags/Dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tags/FinalSpeed/" style="font-size: 10px;">FinalSpeed</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/Meeting/" style="font-size: 10px;">Meeting</a> <a href="/tags/Movie/" style="font-size: 10px;">Movie</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Shadowsocks/" style="font-size: 16.67px;">Shadowsocks</a> <a href="/tags/TV/" style="font-size: 10px;">TV</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Vps/" style="font-size: 20px;">Vps</a> <a href="/tags/Vultr/" style="font-size: 10px;">Vultr</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/next/" style="font-size: 10px;">next</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/sidebar/" style="font-size: 10px;">sidebar</a> <a href="/tags/后端开发/" style="font-size: 10px;">后端开发</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/极路由/" style="font-size: 10px;">极路由</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a> <a href="/tags/美剧/" style="font-size: 10px;">美剧</a> <a href="/tags/自动发布/" style="font-size: 10px;">自动发布</a> <a href="/tags/词/" style="font-size: 10px;">词</a> <a href="/tags/黑客/" style="font-size: 10px;">黑客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/05/spark/">Spark：一个高效的分布式计算系统</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/05/docker-develop/">利用Docker构建开发环境</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/05/norm/">创业公司的这些问题…其实是常态</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/28/mac-ubuntu-finalspeed/">FinalSpeed搭建配置</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/25/python-mysql/">Python操作Mysql</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

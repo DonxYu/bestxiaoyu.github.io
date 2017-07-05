@@ -3,14 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives | Hexo</title>
+  <title>FinalSpeed搭建配置 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="系统环境介绍Vps系统:Ubuntu14.01本机系统:Mac OS X 10.11.3 Vps服务器操作安装并启动123wget http://www.banwagong.me/tools/install_fs.shchmod +x install_fs.sh./install_fs.sh 2&amp;gt;&amp;amp;1 | tee install.log 安装完成后的一些配置路径 查看是否正常开启服务">
+<meta name="keywords" content="Vps,FinalSpeed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FinalSpeed搭建配置">
+<meta property="og:url" content="http://yoursite.com/2016/02/28/mac-ubuntu-finalspeed/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="系统环境介绍Vps系统:Ubuntu14.01本机系统:Mac OS X 10.11.3 Vps服务器操作安装并启动123wget http://www.banwagong.me/tools/install_fs.shchmod +x install_fs.sh./install_fs.sh 2&amp;gt;&amp;amp;1 | tee install.log 安装完成后的一些配置路径 查看是否正常开启服务">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/vps-finalspeed.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/vps-config.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/client-config.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/client-config2.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/shadowsocks-config.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/youtube-demo.png">
+<meta property="og:updated_time" content="2016-02-29T10:15:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="FinalSpeed搭建配置">
+<meta name="twitter:description" content="系统环境介绍Vps系统:Ubuntu14.01本机系统:Mac OS X 10.11.3 Vps服务器操作安装并启动123wget http://www.banwagong.me/tools/install_fs.shchmod +x install_fs.sh./install_fs.sh 2&amp;gt;&amp;amp;1 | tee install.log 安装完成后的一些配置路径 查看是否正常开启服务">
+<meta name="twitter:image" content="http://cdn.bestxiaoyu.com/images/vps-finalspeed.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,215 +71,80 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/05/spark/" class="archive-article-date">
-  <time datetime="2016-03-04T16:46:20.000Z" itemprop="datePublished">Mar 5</time>
+        <section id="main"><article id="post-mac-ubuntu-finalspeed" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/28/mac-ubuntu-finalspeed/" class="article-date">
+  <time datetime="2016-02-28T08:49:53.000Z" itemprop="datePublished">2016-02-28</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Vps/">Vps</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/05/spark/">Spark：一个高效的分布式计算系统</a>
+    <h1 class="article-title" itemprop="name">
+      FinalSpeed搭建配置
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/05/docker-develop/" class="archive-article-date">
-  <time datetime="2016-03-04T16:45:31.000Z" itemprop="datePublished">Mar 5</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/05/docker-develop/">利用Docker构建开发环境</a>
-    </h1>
-  
+        <h4 id="系统环境介绍"><a href="#系统环境介绍" class="headerlink" title="系统环境介绍"></a>系统环境介绍</h4><p>Vps系统:Ubuntu14.01<br>本机系统:Mac OS X 10.11.3</p>
+<h4 id="Vps服务器操作"><a href="#Vps服务器操作" class="headerlink" title="Vps服务器操作"></a>Vps服务器操作</h4><p>安装并启动<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http:<span class="comment">//www.banwagong.me/tools/install_fs.sh</span></div><div class="line">chmod +x install_fs.sh</div><div class="line">./install_fs.sh <span class="number">2</span>&gt;&amp;<span class="number">1</span> | tee install.log</div></pre></td></tr></table></figure></p>
+<p>安装完成后的一些配置路径<br><img src="http://cdn.bestxiaoyu.com/images/vps-finalspeed.png" alt="安装完成后的一些配置路径"></p>
+<p>查看是否正常开启服务 (tail -f /fs/server.log)<br><img src="http://cdn.bestxiaoyu.com/images/vps-config.png" alt="查看是否正常开启服务"></p>
+<h4 id="本机环境操作"><a href="#本机环境操作" class="headerlink" title="本机环境操作"></a>本机环境操作</h4><p>下载FinalSpeed客户端(下载地址:)<br>Windows: <a href="http://fs.d1sm.net/finalspeed/finalspeed_install1.0.exe" target="_blank" rel="external">http://fs.d1sm.net/finalspeed/finalspeed_install1.0.exe</a><br>OS X、Linux: <a href="http://fs.d1sm.net/finalspeed/finalspeed_client1.0.zip" target="_blank" rel="external">http://fs.d1sm.net/finalspeed/finalspeed_client1.0.zip</a></p>
+<p>终端输入:(需要root权限)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo java -jar finalspeed_client.jar</div></pre></td></tr></table></figure></p>
+<p>系统需安装java运行环境,Linux还需安装libpcap.<br>Ubuntu,Debian安装libpcap<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get -y install libpcap-dev</div></pre></td></tr></table></figure></p>
+<p>Centos安装libpcap<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install libpcap</div></pre></td></tr></table></figure></p>
+<p>JDK安装(已安装的请忽略)<br>    <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+<p>客户端配置如下：<br><img src="http://cdn.bestxiaoyu.com/images/client-config.png" alt=""><br>1、vps服务器地址<br>2、协议(看vps架构，openvz架构只支持udp协议，其他的尽量选择tcp协议)<br>3、检测是否连接成功</p>
+<p>增加加速列表配置:<br><img src="http://cdn.bestxiaoyu.com/images/client-config2.png" alt=""><br>1、名称自定义<br>2、加速端口为ss加速端口<br>3、本地端口随意填写(我喜欢9099 :) )</p>
+<p>Shadowsocks客户端配置：<br>新增一条服务器配置如下 端口号与FinalSpeed中本地端口号一致<br><img src="http://cdn.bestxiaoyu.com/images/shadowsocks-config.png" alt=""></p>
+<h4 id="速度测试-Youtube有非常多本人喜欢的学习资料，因此Finalspeed是刚需"><a href="#速度测试-Youtube有非常多本人喜欢的学习资料，因此Finalspeed是刚需" class="headerlink" title="速度测试(Youtube有非常多本人喜欢的学习资料，因此Finalspeed是刚需)"></a>速度测试(Youtube有非常多本人喜欢的学习资料，因此Finalspeed是刚需)</h4><p><img src="http://cdn.bestxiaoyu.com/images/youtube-demo.png" alt=""></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/05/norm/" class="archive-article-date">
-  <time datetime="2016-03-04T16:42:54.000Z" itemprop="datePublished">Mar 5</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/05/norm/">创业公司的这些问题…其实是常态</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/28/mac-ubuntu-finalspeed/" class="archive-article-date">
-  <time datetime="2016-02-28T08:49:53.000Z" itemprop="datePublished">Feb 28</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/28/mac-ubuntu-finalspeed/" data-id="cj4quikwh000ine5s0ber008t" class="article-share-link">Partager</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/28/mac-ubuntu-finalspeed/">FinalSpeed搭建配置</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/25/python-mysql/" class="archive-article-date">
-  <time datetime="2016-02-25T06:51:49.000Z" itemprop="datePublished">Feb 25</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/25/python-mysql/">Python操作Mysql</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FinalSpeed/">FinalSpeed</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vps/">Vps</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/05/norm/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          创业公司的这些问题…其实是常态
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/25/python-mysql/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Python操作Mysql</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/24/digitalocean-ubuntu-shdowsocks/" class="archive-article-date">
-  <time datetime="2016-02-24T10:19:38.000Z" itemprop="datePublished">Feb 24</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/24/digitalocean-ubuntu-shdowsocks/">Digitalocean Ubuntu系统搭建Shadowsocks</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/23/python-douban-movies-pic/" class="archive-article-date">
-  <time datetime="2016-02-23T06:12:48.000Z" itemprop="datePublished">Feb 23</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/23/python-douban-movies-pic/">Python网络爬虫(二) - 爬取豆瓣电影图片</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/23/python-spider/" class="archive-article-date">
-  <time datetime="2016-02-23T05:56:19.000Z" itemprop="datePublished">Feb 23</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/23/python-spider/">Python网络爬虫(一) - 依赖</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/19/hexo-ftp/" class="archive-article-date">
-  <time datetime="2016-02-19T03:23:15.000Z" itemprop="datePublished">Feb 19</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/19/hexo-ftp/">Hexo自动发布到ftp</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/04/hexo-next-sidebar/" class="archive-article-date">
-  <time datetime="2016-02-04T12:17:52.000Z" itemprop="datePublished">Feb 4</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/04/hexo-next-sidebar/">Hexo NexT侧边栏Sidebar配置自动展开教程</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">__('next') &raquo;</a>
-  </nav>
 </section>
         
           <aside id="sidebar">

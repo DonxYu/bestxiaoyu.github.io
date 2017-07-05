@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives | Hexo</title>
+  <title>Python操作Mysql | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="下载MySQL for Python并解压http://sourceforge.net/projects/mysql-python/ 进入目录1234sudo python setup.py cleansudo python setup.py buildsudo python setup.py installpip install MySQL-python 解决 mysql_config not">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python操作Mysql">
+<meta property="og:url" content="http://yoursite.com/2016/02/25/python-mysql/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="下载MySQL for Python并解压http://sourceforge.net/projects/mysql-python/ 进入目录1234sudo python setup.py cleansudo python setup.py buildsudo python setup.py installpip install MySQL-python 解决 mysql_config not">
+<meta property="og:updated_time" content="2016-02-25T07:16:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Python操作Mysql">
+<meta name="twitter:description" content="下载MySQL for Python并解压http://sourceforge.net/projects/mysql-python/ 进入目录1234sudo python setup.py cleansudo python setup.py buildsudo python setup.py installpip install MySQL-python 解决 mysql_config not">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,215 +64,76 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/05/spark/" class="archive-article-date">
-  <time datetime="2016-03-04T16:46:20.000Z" itemprop="datePublished">Mar 5</time>
+        <section id="main"><article id="post-python-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/25/python-mysql/" class="article-date">
+  <time datetime="2016-02-25T06:51:49.000Z" itemprop="datePublished">2016-02-25</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/05/spark/">Spark：一个高效的分布式计算系统</a>
+    <h1 class="article-title" itemprop="name">
+      Python操作Mysql
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/05/docker-develop/" class="archive-article-date">
-  <time datetime="2016-03-04T16:45:31.000Z" itemprop="datePublished">Mar 5</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/05/docker-develop/">利用Docker构建开发环境</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/05/norm/" class="archive-article-date">
-  <time datetime="2016-03-04T16:42:54.000Z" itemprop="datePublished">Mar 5</time>
-</a>
+        <h4 id="下载MySQL-for-Python并解压"><a href="#下载MySQL-for-Python并解压" class="headerlink" title="下载MySQL for Python并解压"></a>下载MySQL for Python并解压</h4><p><a href="http://sourceforge.net/projects/mysql-python/" target="_blank" rel="external">http://sourceforge.net/projects/mysql-python/</a></p>
+<h4 id="进入目录"><a href="#进入目录" class="headerlink" title="进入目录"></a>进入目录</h4><pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo python setup.py clean</div><div class="line">sudo python setup.py build</div><div class="line">sudo python setup.py install</div><div class="line">pip install MySQL-python</div></pre></td></tr></table></figure>
+</code></pre><h4 id="解决-mysql-config-not-found-错误"><a href="#解决-mysql-config-not-found-错误" class="headerlink" title="解决 mysql_config not found 错误"></a>解决 mysql_config not found 错误</h4><p>在 MySQL-python 的安装包中找到 site.cfg 文件，打开它，找到以下内容:</p>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># The path to mysql_config.</span></div><div class="line"><span class="comment"># Only use this if mysql_config is not on your PATH, or you have some weird</span></div><div class="line"><span class="comment"># setup that requires it.</span></div><div class="line"><span class="comment"># mysql_config = /usr/local/bin/mysql_config</span></div></pre></td></tr></table></figure>
+</code></pre><p>将最后一句句首井号去掉，并修改为:</p>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql_config = /usr/local/mysql/bin/mysql_config</div></pre></td></tr></table></figure>
+</code></pre><p>然后执行:</p>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ python setup.py install</div></pre></td></tr></table></figure>
+</code></pre><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> MySQLdb</div><div class="line"></div><div class="line"><span class="comment"># 打开数据库连接</span></div><div class="line">db = MySQLdb.connect(<span class="string">"localhost"</span>,<span class="string">"root"</span>,<span class="string">""</span>,<span class="string">"test"</span> )</div><div class="line"></div><div class="line"><span class="comment"># 使用cursor()方法获取操作游标 </span></div><div class="line">cursor = db.cursor()</div><div class="line"></div><div class="line"><span class="comment"># 使用execute方法执行SQL语句</span></div><div class="line">cursor.execute(<span class="string">"SELECT VERSION()"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 使用 fetchone() 方法获取一条数据库。</span></div><div class="line">data = cursor.fetchone()</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"Database version : %s "</span> % data</div><div class="line"></div><div class="line"><span class="comment"># 创建数据表SQL语句</span></div><div class="line">sql = <span class="string">"""</span></div><div class="line">		CREATE TABLE EMPLOYEE (</div><div class="line">         FIRST_NAME  CHAR(20) NOT NULL,</div><div class="line">         LAST_NAME  CHAR(20),</div><div class="line">         AGE INT,  </div><div class="line">         SEX CHAR(1),</div><div class="line">         INCOME FLOAT )</div><div class="line">          """</div><div class="line"></div><div class="line">cursor.execute(sql)</div><div class="line"></div><div class="line"><span class="comment"># SQL 插入语句</span></div><div class="line">sql = <span class="string">"""</span></div><div class="line">		INSERT INTO EMPLOYEE(FIRST_NAME,</div><div class="line">         LAST_NAME, AGE, SEX, INCOME)</div><div class="line">         VALUES ('Mac', 'Mohan', 20, 'M', 2000)</div><div class="line">      """</div><div class="line"><span class="keyword">try</span>:</div><div class="line">   <span class="comment"># 执行sql语句</span></div><div class="line">   cursor.execute(sql)</div><div class="line">   <span class="comment"># 提交到数据库执行</span></div><div class="line">   db.commit()</div><div class="line"><span class="keyword">except</span>:</div><div class="line">   <span class="comment"># 发成错误时回滚</span></div><div class="line">   db.rollback()</div><div class="line"></div><div class="line"><span class="comment"># 关闭数据库连接</span></div><div class="line">db.close()</div></pre></td></tr></table></figure>
+</code></pre>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/05/norm/">创业公司的这些问题…其实是常态</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/28/mac-ubuntu-finalspeed/" class="archive-article-date">
-  <time datetime="2016-02-28T08:49:53.000Z" itemprop="datePublished">Feb 28</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/25/python-mysql/" data-id="cj4quikwy0014ne5sfixwn4tp" class="article-share-link">Partager</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/28/mac-ubuntu-finalspeed/">FinalSpeed搭建配置</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/25/python-mysql/" class="archive-article-date">
-  <time datetime="2016-02-25T06:51:49.000Z" itemprop="datePublished">Feb 25</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/25/python-mysql/">Python操作Mysql</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/28/mac-ubuntu-finalspeed/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          FinalSpeed搭建配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/24/digitalocean-ubuntu-shdowsocks/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Digitalocean Ubuntu系统搭建Shadowsocks</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/24/digitalocean-ubuntu-shdowsocks/" class="archive-article-date">
-  <time datetime="2016-02-24T10:19:38.000Z" itemprop="datePublished">Feb 24</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/24/digitalocean-ubuntu-shdowsocks/">Digitalocean Ubuntu系统搭建Shadowsocks</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/23/python-douban-movies-pic/" class="archive-article-date">
-  <time datetime="2016-02-23T06:12:48.000Z" itemprop="datePublished">Feb 23</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/23/python-douban-movies-pic/">Python网络爬虫(二) - 爬取豆瓣电影图片</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/23/python-spider/" class="archive-article-date">
-  <time datetime="2016-02-23T05:56:19.000Z" itemprop="datePublished">Feb 23</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/23/python-spider/">Python网络爬虫(一) - 依赖</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/19/hexo-ftp/" class="archive-article-date">
-  <time datetime="2016-02-19T03:23:15.000Z" itemprop="datePublished">Feb 19</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/19/hexo-ftp/">Hexo自动发布到ftp</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/04/hexo-next-sidebar/" class="archive-article-date">
-  <time datetime="2016-02-04T12:17:52.000Z" itemprop="datePublished">Feb 4</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/04/hexo-next-sidebar/">Hexo NexT侧边栏Sidebar配置自动展开教程</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">__('next') &raquo;</a>
-  </nav>
 </section>
         
           <aside id="sidebar">

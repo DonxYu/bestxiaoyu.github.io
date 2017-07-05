@@ -3,14 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives | Hexo</title>
+  <title>Python网络爬虫(二) - 爬取豆瓣电影图片 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="爬取页面地址1http://movie.douban.com/nowplaying/nanjing/ 豆瓣电影页面源代码123456789101112131415 &amp;lt;ul class=&quot;&quot;&amp;gt;&amp;lt;li class=&quot;poster&quot;&amp;gt;    &amp;lt;a href=&quot;http://movie.douban.com/subject/26334559/?from=playing_pos">
+<meta name="keywords" content="python,爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python网络爬虫(二) - 爬取豆瓣电影图片">
+<meta property="og:url" content="http://yoursite.com/2016/02/23/python-douban-movies-pic/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="爬取页面地址1http://movie.douban.com/nowplaying/nanjing/ 豆瓣电影页面源代码123456789101112131415 &amp;lt;ul class=&quot;&quot;&amp;gt;&amp;lt;li class=&quot;poster&quot;&amp;gt;    &amp;lt;a href=&quot;http://movie.douban.com/subject/26334559/?from=playing_pos">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/QQ20160223-0@2x.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images/QQ20160223-1@2x.png">
+<meta property="og:image" content="http://cdn.bestxiaoyu.com/images%2Fcoffee.png?imageView2/1/w/200/h/200/q/75">
+<meta property="og:updated_time" content="2016-02-23T06:28:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Python网络爬虫(二) - 爬取豆瓣电影图片">
+<meta name="twitter:description" content="爬取页面地址1http://movie.douban.com/nowplaying/nanjing/ 豆瓣电影页面源代码123456789101112131415 &amp;lt;ul class=&quot;&quot;&amp;gt;&amp;lt;li class=&quot;poster&quot;&amp;gt;    &amp;lt;a href=&quot;http://movie.douban.com/subject/26334559/?from=playing_pos">
+<meta name="twitter:image" content="http://cdn.bestxiaoyu.com/images/QQ20160223-0@2x.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,215 +68,79 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/05/spark/" class="archive-article-date">
-  <time datetime="2016-03-04T16:46:20.000Z" itemprop="datePublished">Mar 5</time>
+        <section id="main"><article id="post-python-douban-movies-pic" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/23/python-douban-movies-pic/" class="article-date">
+  <time datetime="2016-02-23T06:12:48.000Z" itemprop="datePublished">2016-02-23</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/05/spark/">Spark：一个高效的分布式计算系统</a>
+    <h1 class="article-title" itemprop="name">
+      Python网络爬虫(二) - 爬取豆瓣电影图片
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/05/docker-develop/" class="archive-article-date">
-  <time datetime="2016-03-04T16:45:31.000Z" itemprop="datePublished">Mar 5</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/05/docker-develop/">利用Docker构建开发环境</a>
-    </h1>
-  
+        <h4 id="爬取页面地址"><a href="#爬取页面地址" class="headerlink" title="爬取页面地址"></a>爬取页面地址</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://movie.douban.com/nowplaying/nanjing/</div></pre></td></tr></table></figure>
+<h4 id="豆瓣电影页面源代码"><a href="#豆瓣电影页面源代码" class="headerlink" title="豆瓣电影页面源代码"></a>豆瓣电影页面源代码</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"> &lt;ul class=""&gt;</div><div class="line">&lt;li class="poster"&gt;</div><div class="line">    &lt;a href="http://movie.douban.com/subject/26334559/?from=playing_poster" class=ticket-btn target="_blank" data-psource="poster"&gt;</div><div class="line">        &lt;img src="http://img3.doubanio.com/view/movie_poster_cover/mpst/public/p2309171908.jpg" alt="澳门风云3" rel="nofollow" class="" /&gt;</div><div class="line">    &lt;/a&gt;</div><div class="line">&lt;/li&gt;</div><div class="line">&lt;li class="stitle"&gt;</div><div class="line">    &lt;a href="http://movie.douban.com/subject/26334559/?from=playing_poster"</div><div class="line">        class="ticket-btn"</div><div class="line">        target="_blank"</div><div class="line">        title="澳门风云3"</div><div class="line">        data-psource="title"&gt;</div><div class="line">        澳门风云3</div><div class="line">    &lt;/a&gt;</div><div class="line">&lt;/li&gt;</div></pre></td></tr></table></figure>
+<p>图片链接就在li这个标签下地img标签里.现在我们需要做的就是尝试着把这种类型的li从所有html中分离出来.我们可以看到li这个标签有个属性叫做class,这个属性的值是class=”poster”</p>
+<p>再仔细分析下,img这个标签在li这个标签里有且只有一个.那么,也就是说,我们先搜索出所有符合条件的li标签,然后找到里面的img标签就可以找到所有的图片链接了.</p>
+<p>alt为图片名</p>
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment">#-*- coding: utf-8 -*-</span></div><div class="line"><span class="comment">#encoding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line"><span class="keyword">import</span> urllib</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">from</span> BeautifulSoup <span class="keyword">import</span> BeautifulSoup</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getAllImageLink</span><span class="params">()</span>:</span></div><div class="line">    html = urllib2.urlopen(<span class="string">'http://movie.douban.com/nowplaying/nanjing/'</span>).read()</div><div class="line">    soup = BeautifulSoup(html)</div><div class="line"></div><div class="line">    liResult = soup.findAll(<span class="string">'li'</span>,attrs=&#123;<span class="string">"class"</span>:<span class="string">"poster"</span>&#125;)</div><div class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> liResult:</div><div class="line">        imageEntityArray = li.findAll(<span class="string">'img'</span>)</div><div class="line">        <span class="keyword">for</span> image <span class="keyword">in</span> imageEntityArray:</div><div class="line">            link = image.get(<span class="string">'src'</span>)</div><div class="line">            imageName = image.get(<span class="string">'alt'</span>)</div><div class="line">            filesavepath = <span class="string">'/Users/DonxYu/Desktop/pic/%s.jpg'</span> % imageName </div><div class="line">            urllib.urlretrieve(link,filesavepath)</div><div class="line">            <span class="keyword">print</span> filesavepath </div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    getAllImageLink()</div></pre></td></tr></table></figure>
+<p><img src="http://cdn.bestxiaoyu.com/images/QQ20160223-0@2x.png" alt=""></p>
+<p><img src="http://cdn.bestxiaoyu.com/images/QQ20160223-1@2x.png" alt=""></p>
+<hr>
+<blockquote>
+<p>微信扫一扫，请博主喝杯咖啡.<br><img src="http://cdn.bestxiaoyu.com/images%2Fcoffee.png?imageView2/1/w/200/h/200/q/75" alt="微信扫一扫，请博主喝杯咖啡."></p>
+</blockquote>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/05/norm/" class="archive-article-date">
-  <time datetime="2016-03-04T16:42:54.000Z" itemprop="datePublished">Mar 5</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/05/norm/">创业公司的这些问题…其实是常态</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/28/mac-ubuntu-finalspeed/" class="archive-article-date">
-  <time datetime="2016-02-28T08:49:53.000Z" itemprop="datePublished">Feb 28</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/23/python-douban-movies-pic/" data-id="cj4quikwv0011ne5s1tbz6e29" class="article-share-link">Partager</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/28/mac-ubuntu-finalspeed/">FinalSpeed搭建配置</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/25/python-mysql/" class="archive-article-date">
-  <time datetime="2016-02-25T06:51:49.000Z" itemprop="datePublished">Feb 25</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/25/python-mysql/">Python操作Mysql</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/24/digitalocean-ubuntu-shdowsocks/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Digitalocean Ubuntu系统搭建Shadowsocks
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/23/python-spider/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Python网络爬虫(一) - 依赖</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/24/digitalocean-ubuntu-shdowsocks/" class="archive-article-date">
-  <time datetime="2016-02-24T10:19:38.000Z" itemprop="datePublished">Feb 24</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/24/digitalocean-ubuntu-shdowsocks/">Digitalocean Ubuntu系统搭建Shadowsocks</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/23/python-douban-movies-pic/" class="archive-article-date">
-  <time datetime="2016-02-23T06:12:48.000Z" itemprop="datePublished">Feb 23</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/23/python-douban-movies-pic/">Python网络爬虫(二) - 爬取豆瓣电影图片</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/23/python-spider/" class="archive-article-date">
-  <time datetime="2016-02-23T05:56:19.000Z" itemprop="datePublished">Feb 23</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/23/python-spider/">Python网络爬虫(一) - 依赖</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/19/hexo-ftp/" class="archive-article-date">
-  <time datetime="2016-02-19T03:23:15.000Z" itemprop="datePublished">Feb 19</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/19/hexo-ftp/">Hexo自动发布到ftp</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/04/hexo-next-sidebar/" class="archive-article-date">
-  <time datetime="2016-02-04T12:17:52.000Z" itemprop="datePublished">Feb 4</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/04/hexo-next-sidebar/">Hexo NexT侧边栏Sidebar配置自动展开教程</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">__('next') &raquo;</a>
-  </nav>
 </section>
         
           <aside id="sidebar">

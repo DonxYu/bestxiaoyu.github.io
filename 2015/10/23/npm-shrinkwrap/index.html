@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用 npm shrinkwrap 来管理项目依赖 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="管理依赖是一个复杂软件开发过程中必定会遇到的问题。 在Node.js项目开发的时候，我们也经常需要安装和升级对应的依赖。虽然 npm 以及语意化的版本号 (semantic versioning, semver) 让开发过程中依赖的获取和升级变得非常容易， 但不严格的版本号限制，也带来了版本号的不确定性。主要的问题可能有三个： npm 建议使用 semver 的应用程序版本，但这也完全依赖第三方包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 npm shrinkwrap 来管理项目依赖">
+<meta property="og:url" content="http://yoursite.com/2015/10/23/npm-shrinkwrap/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="管理依赖是一个复杂软件开发过程中必定会遇到的问题。 在Node.js项目开发的时候，我们也经常需要安装和升级对应的依赖。虽然 npm 以及语意化的版本号 (semantic versioning, semver) 让开发过程中依赖的获取和升级变得非常容易， 但不严格的版本号限制，也带来了版本号的不确定性。主要的问题可能有三个： npm 建议使用 semver 的应用程序版本，但这也完全依赖第三方包">
+<meta property="og:updated_time" content="2016-03-04T16:37:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 npm shrinkwrap 来管理项目依赖">
+<meta name="twitter:description" content="管理依赖是一个复杂软件开发过程中必定会遇到的问题。 在Node.js项目开发的时候，我们也经常需要安装和升级对应的依赖。虽然 npm 以及语意化的版本号 (semantic versioning, semver) 让开发过程中依赖的获取和升级变得非常容易， 但不严格的版本号限制，也带来了版本号的不确定性。主要的问题可能有三个： npm 建议使用 semver 的应用程序版本，但这也完全依赖第三方包">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-npm-shrinkwrap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/23/npm-shrinkwrap/" class="article-date">
+  <time datetime="2015-10-23T09:30:54.000Z" itemprop="datePublished">2015-10-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/npm/">npm</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用 npm shrinkwrap 来管理项目依赖
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>管理依赖是一个复杂软件开发过程中必定会遇到的问题。</p>
+<p>在Node.js项目开发的时候，我们也经常需要安装和升级对应的依赖。虽然 npm 以及语意化的版本号 (semantic versioning, semver) 让开发过程中依赖的获取和升级变得非常容易， 但不严格的版本号限制，也带来了版本号的不确定性。主要的问题可能有三个：</p>
+<p>npm 建议使用 semver 的应用程序版本，但这也完全依赖第三方包遵守这一规则。如果你依赖于的包不遵循 semver ，或者依赖的包的新版本有重大更改（而你使用了 ^ 的宽泛版本安装），这潜在可能是会导致问题的。<br>另一个问题的出现是由于 npm 安装依赖的机制。npm 的安装包是有层次结构的，手动控制要安装的软件包的版本号可以实现，但是你只能在 package.json 使用精确的版本号控制你的直接依赖包，但那些多层以上的依赖就没办法控制了；一个第三方包不严谨的版本依赖生命可能破坏你的依赖管理。<br>在开发阶段执行得到的版本，和后续部署时得到的可能是不一致的，更不可控的是，你依赖的第三方包也有这样的情况会导致潜在的上线风险。<br>如果要控制上线的风险，我们就必需要解决这个问题，这时候，就需要使用 npm shrinkwrap 这个命令来解决问题。</p>
+<p>介绍 shrinkwrap<br>npm shrinkwrap 可以按照当前项目 node_modules 目录内的安装包情况生成稳定的版本号描述。</p>
+<p>比方说，有一个包 A</p>
+<pre><code>{
+  &quot;name&quot;: &quot;A&quot;,
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;dependencies&quot;: {
+    &quot;B&quot;: &quot;&lt;0.1.0&quot;
+  }
+}
+</code></pre><p>还有一个包 B</p>
+<pre><code>{
+  &quot;name&quot;: &quot;B&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;dependencies&quot;: {
+    &quot;C&quot;: &quot;&lt;0.1.0&quot;
+  }
+}
+</code></pre><p>以及包 C</p>
+<pre><code>{
+  &quot;name&quot;: &quot;C&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;
+}
+</code></pre><p>你的项目只依赖于 A，于是 npm install 会得到这样的目录结构</p>
+<p>   A@0.1.0<br>     <code>-- B@0.0.1</code>– C@0.0.1<br>这时候，B@0.0.2 发布了，这时候在一个新的环境下执行 npm install 将得到</p>
+<p> A@0.1.0<br>     <code>-- B@0.0.2</code>– C@0.0.1<br>这时候两次安装得到的版本号就不一致了。而通过 shrinkwrap 命令，我们可以保证在所有环境下安装得到稳定的结果。</p>
+<p>在项目引入新包的时候，或者 A 的开发者执行一下 npm shrinkwrap，可以在项目根目录得到一个 npm-shrinkwrap.json 文件。</p>
+<p>这个文件内容如下</p>
+<pre><code>{
+  &quot;name&quot;: &quot;A&quot;,
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;dependencies&quot;: {
+    &quot;B&quot;: {
+      &quot;version&quot;: &quot;0.0.1&quot;,
+      &quot;dependencies&quot;: {
+        &quot;C&quot;: {
+          &quot;version&quot;: &quot;0.0.1&quot;
+        }
+      }
+    }
+  }
+}
+</code></pre><p>shrinkwrap 命令根据目前安装在node_modules的文件情况锁定依赖版本。在项目中执行 npm install 的时候，npm 会检查在根目录下有没有 npm-shrinkwrap.json 文件，如果 shrinkwrap 文件存在的话，npm 会使用它（而不是 package.json）来确定安装的各个包的版本号信息。</p>
+<p>这样一来，在安装时候确定的所有版本信息会稳定的固化在 shrinkwrap 里。无论是A，B 和 C中的版本如何变化，或者它们的 package.json 文件如何修改，你始终能保证，在你项目中执行 npm install 的到的版本号时稳定的。</p>
+<p>在开发中使用 shrinkwrap<br>在开发过程中，引入一个新包的流程如下</p>
+<p>npm install PACKAGE_NAME@VERSION –save 获取特定版本的包<br>测试功能<br>测试功能正常后，执行 npm shrinkwrap 把依赖写入 shrinkwrap 文件<br>在代码仓库中提交 shrinkwrap / package.json 描述<br>升级一个包的流程应该是这样</p>
+<p>npm outdated 获取项目所有依赖的更新信息<br>npm install PACKAGE_NAME@VERSION –save 获取特定版本的包<br>测试功能<br>测试功能正常后，执行 npm shrinkwrap 把依赖写入 shrinkwrap 文件<br>在代码仓库中提交 shrinkwrap / package.json 描述<br>删除一个包的流程如下</p>
+<p>npm uninstall PACKAGE_NAME –save 删除这个包<br>测试功能<br>测试功能正常后，执行 npm shrinkwrap 把更新的依赖写入 shrinkwrap 文件<br>在代码仓库中提交 shrinkwrap / package.json 描述<br>比一般的安装多了一步手工生成 shrinkwrap 文件。在实际工作中，有时候我们会忘记这一步，导致上线时候没有获取到依赖包的特定版本。</p>
+<p>介绍 npm-shrinkwrap-install<br>去年我引入 shrinkwrap 工作流的时候，npm 官方的 shrinkwrap 命令还有很多问题，比如</p>
+<p>在生成版本描述的时候不会忽略 devDependencies 和 optionalDependencies<br>不会检查 package.json 和 shrinkwrap 文件的差异<br>不会删除 from 字段（这个字段没有用），导致在 diff 时候会出现多余的信息<br>所以我写了一个 bin/shrinkwrap 脚本。这个脚本会自动对比 package.json 和 npm-shrinkwrap.json 文件的区别，获取需要更新的版本，然后对相关信息进行更新。(更新：现在的 npm shrinkwrap 已经修复了很多的问题，但 from 字段有时候仍然有些小问题。）</p>
+<p>当时为了忽略 devDependencies 和 optionalDependencies，我会执行 npm prune 删除额外的包之后才生成版本描述，然后再把其它的包装回来，导致脚本执行时间有点长。</p>
+<p>后面 uber 发布了 npm-shrinkwrap 工具，可以更高效的生成版本描述。可惜这个包不支持 scoped package。我花了一点时间 patch 了这个工具，因为它们的发版太慢，所以我发布了一份 @th507/npm-shrinkwrap，可以支持 scoped package。</p>
+<p>在上面这个包的基础上，我还写了另外一个小工具，叫做 npm-shrinkwrap-install，它可以无缝替换 npm install 的执行过程，让 shrinkwrap 文件的生成变得更自动。</p>
+<p>安装<br>$ npm install npm-shrinkwrap-install<br>安装完成之后，有如下命令可以使用</p>
+<p>安装依赖的命令<br>npm-install<br>npm-i</p>
+<p>删除依赖的命令<br>npm-unisntall<br>npm-un<br>npm-remove<br>npm-rm<br>npm-r</p>
+<p>手工生成 shrinkwrap 描述<br>npm-shrinkwrap</p>
+<p>在开发中使用 npm-install<br>引入新依赖包</p>
+<p>npm-install PACKAGE_NAME@VERSION –save 获取特定版本的包<br>测试功能<br>在代码仓库中提交 shrinkwrap / package.json 描述<br>npm-install 在运行时会对 package.json 中的依赖做校验，如果你直接修改 package.json 文件，或者是指定了一个非严格的版本号，在运行的时候都会做更新检查，防止遗漏。</p>
+<p>值得注意的是，因为 npm-install 会进行依赖对比和校验，在安装新包的时候需要带上 –save 参数。否则，在自动更新 shrinkwrap 描述之前，脚本会自动移除多余的依赖包，导致你新安装的包被删除。</p>
+<p>升级依赖包</p>
+<p>npm outdated 获取项目所有依赖的更新信息<br>npm-install PACKAGE_NAME@VERSION –save 获取特定版本的包<br>测试功能<br>在代码仓库中提交 shrinkwrap / package.json 描述<br>package.json 文件中指定了一个非严格的版本号的依赖在运行 npm-install 的时候会做自动更新检查，无需指定版本号，如果你不希望进行自动更新，请在 package.json 中使用严格版本号。</p>
+<p>删除依赖包</p>
+<p>npm-uninstall PACKAGE_NAME –save 删除这个包<br>测试功能<br>在代码仓库中提交 shrinkwrap / package.json 描述<br>可以看到，在实际使用中没有引入额外的流程，对开发者基本没有学习的负担。但仍然注意，不建议开发者执行 npm update 命令更新所有的依赖。</p>
+<p>小结<br>通过引入 shrinkwrap 文件，我们可以较好的管理项目的依赖关系，让上线变得更轻松。需要注意的是，尽管相关工具可以帮助你减化工作流程、可靠的分发依赖描述，但工具不能取代功能测试；每次升级依赖版本之后，我们仍然应该进行相关测试来确保项目能可靠的运行在该环境中。</p>
+<p>如果使用 @th507/npm-shrinkwrap 或者 npm-shrinkwrap-install 有任何问题欢迎给我提 issue。</p>
+<p>本文没有涉及如何优化上线前的安装过程，缩短依赖构建时间，这个问题留给专门的文介绍。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/23/npm-shrinkwrap/" data-id="cj4quikwo000qne5spmw1jk9y" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/27/server-books/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          我的后端开发书架2015 2.0版
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/12/DiveIntoMethodCache/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">深入理解Objective-C：方法缓存</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Objective-C/">Objective-C</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vps/">Vps</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能/">性能</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能优化/">性能优化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Books/">Books</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Digitalocean/">Digitalocean</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dropbox/">Dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FinalSpeed/">FinalSpeed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meeting/">Meeting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vps/">Vps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vultr/">Vultr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/">Work</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/">next</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sidebar/">sidebar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后端开发/">后端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/极路由/">极路由</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美剧/">美剧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动发布/">自动发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/词/">词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑客/">黑客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Books/" style="font-size: 10px;">Books</a> <a href="/tags/Debian/" style="font-size: 10px;">Debian</a> <a href="/tags/Digitalocean/" style="font-size: 10px;">Digitalocean</a> <a href="/tags/Dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tags/FinalSpeed/" style="font-size: 10px;">FinalSpeed</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/Meeting/" style="font-size: 10px;">Meeting</a> <a href="/tags/Movie/" style="font-size: 10px;">Movie</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Shadowsocks/" style="font-size: 16.67px;">Shadowsocks</a> <a href="/tags/TV/" style="font-size: 10px;">TV</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Vps/" style="font-size: 20px;">Vps</a> <a href="/tags/Vultr/" style="font-size: 10px;">Vultr</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/next/" style="font-size: 10px;">next</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/sidebar/" style="font-size: 10px;">sidebar</a> <a href="/tags/后端开发/" style="font-size: 10px;">后端开发</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/极路由/" style="font-size: 10px;">极路由</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a> <a href="/tags/美剧/" style="font-size: 10px;">美剧</a> <a href="/tags/自动发布/" style="font-size: 10px;">自动发布</a> <a href="/tags/词/" style="font-size: 10px;">词</a> <a href="/tags/黑客/" style="font-size: 10px;">黑客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/05/spark/">Spark：一个高效的分布式计算系统</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/05/docker-develop/">利用Docker构建开发环境</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/05/norm/">创业公司的这些问题…其实是常态</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/28/mac-ubuntu-finalspeed/">FinalSpeed搭建配置</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/25/python-mysql/">Python操作Mysql</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

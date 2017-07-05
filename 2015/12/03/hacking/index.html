@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>黑客高手讲述入侵实践经验 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="无论什么站，无论什么语言，我要渗透，第一件事就是扫目录，最好一下扫出个上传点，直接上传 shell ，诸位不要笑，有时候你花很久搞一个站，最后发现有个现成的上传点，而且很容易猜到，不过这种情况发生在 asp 居多！  无论什么站，无论什么语言，我要渗透，第一件事就是扫目录，最好一下扫出个上传点，直接上传 shell ，诸位不要笑，有时候你花很久搞一个站，最后发现有个现成的上传点，而且很容易猜到，不">
+<meta name="keywords" content="安全,黑客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="黑客高手讲述入侵实践经验">
+<meta property="og:url" content="http://yoursite.com/2015/12/03/hacking/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="无论什么站，无论什么语言，我要渗透，第一件事就是扫目录，最好一下扫出个上传点，直接上传 shell ，诸位不要笑，有时候你花很久搞一个站，最后发现有个现成的上传点，而且很容易猜到，不过这种情况发生在 asp 居多！  无论什么站，无论什么语言，我要渗透，第一件事就是扫目录，最好一下扫出个上传点，直接上传 shell ，诸位不要笑，有时候你花很久搞一个站，最后发现有个现成的上传点，而且很容易猜到，不">
+<meta property="og:updated_time" content="2016-02-04T06:16:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="黑客高手讲述入侵实践经验">
+<meta name="twitter:description" content="无论什么站，无论什么语言，我要渗透，第一件事就是扫目录，最好一下扫出个上传点，直接上传 shell ，诸位不要笑，有时候你花很久搞一个站，最后发现有个现成的上传点，而且很容易猜到，不过这种情况发生在 asp 居多！  无论什么站，无论什么语言，我要渗透，第一件事就是扫目录，最好一下扫出个上传点，直接上传 shell ，诸位不要笑，有时候你花很久搞一个站，最后发现有个现成的上传点，而且很容易猜到，不">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hacking" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/03/hacking/" class="article-date">
+  <time datetime="2015-12-02T16:00:00.000Z" itemprop="datePublished">2015-12-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web/">Web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      黑客高手讲述入侵实践经验
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>无论什么站，无论什么语言，我要渗透，第一件事就是扫目录，最好一下扫出个上传点，直接上传 shell ，诸位不要笑，有时候你花很久搞一个站，最后发现有个现成的上传点，而且很容易猜到，不过这种情况发生在 asp 居多！</p>
+<ol>
+<li><p>无论什么站，无论什么语言，我要渗透，第一件事就是扫目录，最好一下扫出个上传点，直接上传 shell ，诸位不要笑，有时候你花很久搞一个站，最后发现有个现成的上传点，而且很容易猜到，不过这种情况发生在 asp 居多！</p>
+</li>
+<li><p>asp （ aspx ）+MSSQL 先考虑注入，一般的注入都有 DBowner 权限可以直接写 shell ；如果写不了，或者 web 与数据库分离，那就猜数据，从后台下手了，后台可以上传或者改配置文件；</p>
+</li>
+<li><p>asp （ aspx ）+ACCESS 拿 shell 一般只有 3 种方法，一是前台上传或者注入进后台上传；二是注入进后台改配置文件；三是注入进后台备份数据库或者暴库后知道是 asp 或者 asa 数据库于是直接写一句话；</p>
+</li>
+<li><p>php+MYSQL 一般是注入进后台上传，偶尔运气好些权限够高可以注入 select into outfile ；然后包含，分本地与远程，远程包含在高版本 php 是不支持的，于是想办法本地上传图片文件或者写到 log 里；然后 php 程序某某未公开的漏洞，运气好可以直接写 shell 。</p>
+</li>
+<li><p>jsp+MYSQL 利用数据库拿权限方面基本同 php ，而且 jsp 的上传基本很少检查文件后缀，于是只要有注入点与后台，拿 shell 相当的容易。 jsp+ORACLE 的站我碰到的不多，碰到的也是猜出用户名与密码从后台下手的。</p>
+</li>
+<li><p>无论什么大站，主站一般都很安全（不然早被人玩了），于是一般从二级域名下手，猜出主站的某些用户名与密码或者搞到主站的源代码，或者旁注得到同网段服务器后 cain 或 arp 。</p>
+</li>
+<li><p>一般的大站很少有用现成的 CMS 的，于是如果你有幸找到源码，那你就发了，注入漏洞啊，上传漏洞啊，写文件漏洞啊，都掌握在你手里。多看看那些大站新出来的测试分站点，那些站还在测试中，可以很轻松拿下。</p>
+</li>
+<li><p>上传有个文件名截断，这包括 2 个方面，一是 00 截断，二是长文件名截断（曾经利用这个搞下 hw ）；然后很多写文件的地方，都可以 00 ，屡试不爽。上传别忘了.asp （当然.asa ，.cer ，.cdx 都可以啦）目录的妙用。</p>
+</li>
+<li><p>php 站无论 windows 还是 linux ，都有 magic_quotes_gpc 的问题， magic_quotes_gpc 为 on 的时候，在 server 变量注入的时候还是可以 select into outfile ，今年我搞过某未开源 cms 就是这个情况，一般情况下为 on 就别考虑写文件了，不过有这个权限别忘了读文件源码，因为 load_file 的参数是可以编码的。</p>
+</li>
+<li><p>猜路径或者文件在入侵中非常必要，猜不到路径的时候别忘了 google （ baidu 太烂， google 很全），于是你可以考虑看站点下的 robot.txt 或者 robots.txt ，会有惊喜。</p>
+</li>
+<li><p>工具的使用很重要，入侵之前用 WVS 扫扫会有助入侵；注入工具虽然很多，但不见得都好使，现在的软硬防火墙、防注入越来越厉害，那时候你就别偷懒，多手工有助你成长。</p>
+</li>
+<li><p>遇到过一流监控么，遇到其他防 post 的防火墙么，有时候一句话进去了都无法传大马，那时候，你先学学编码，学学变换绕过。</p>
+</li>
+<li><p>想搞一般的小站，记得查看这个小站的版权，找做这个站的公司，然后从这个公司做的其他站下手，得到源码再回头搞，我曾经通过这个方法拿下某知名制药的公司站。</p>
+</li>
+<li><p>旁注的思路永远不过时，遇到 dbowner 的注入，可以很舒服写 shell 到你需要的站，省得麻烦的提权了；运气不好，按部就班拿 shell 提权得到你所需。</p>
+</li>
+<li><p>永远别忘记社会工程学，利用社工把自己当成一个什么也不会的人，从某某站长的 qq ，身份证，邮箱等等下手，也许有时可能会有意外；另外别忘记 admin,admin ； test,test ； 123456,123456 这种简单的尝试，当然，你也可以暴力破解。</p>
+</li>
+<li><p>别忽视 XSS ，别忽视 cookie ， XSS 可以偷 cookie ，更有若干妙用，自己学会领悟； cookie 可以伪造登陆， cookie 可以注入， cookie 注入可以绕绝大多数的防火墙。</p>
+</li>
+<li><p>平时搞站多多搜集路径啊，源码啊，工具啊，充实自己的“武器”库；最好把自己的入侵步骤记录下来，或者事后反思下，我一般都是记在 txt 里，另外要做到举一反三。</p>
+</li>
+<li><p>到 GoogLe,搜索一些关键字,edit.asp? 韩国肉鸡为多,多数为 MSSQL 数据库!</p>
+</li>
+<li><p>到 Google ,site:cq.cn inurl:asp</p>
+</li>
+<li><p>利用挖掘鸡和一个 ASP 木马. 文件名是 login.asp 路径组是 /manage/ 关键词是 went.asp 用’or’=’or’来登陆</p>
+</li>
+<li><p>关键字： Co Net MIB Ver 1.0 网站后台管理系统帐号密码为 ‘or’=’or’</p>
+</li>
+<li><p>动感购物系统 inurl:help.asp 登陆，如未注册成为会员! upLoad_bm1.asp 和 upLoad_c1.asp 这两个随便选个，一般管理员都忽视了这 2 漏洞</p>
+</li>
+<li><p>默认数据库地址 blogdata/acblog.asa 关键字： acblog</p>
+</li>
+<li><p>百度 /htdocs 注册里可以直接上传 asa 文件！</p>
+</li>
+<li><p>/Database/#newasp.mdb 关键词： NewAsp SiteManageSystem Version</p>
+</li>
+<li><p>用挖掘机 关键字： Powered by WEBBOY 页面：/upfile.asp</p>
+</li>
+<li><p>baidu 中搜索关键字 Ver5.0 Build 0519 (存在上传漏洞)</p>
+</li>
+<li><p>Upfile_Article.asp bbs/upfile.asp 输入关键字： powered by mypower ，</p>
+</li>
+<li><p>inurl:winnt\system32\inetsrv\ 在 google 里面输入这个就可以找到很多网站</p>
+</li>
+<li><p>现在 GOOGLE 搜索关键字 intitle:网站小助手　 inurl:asp</p>
+</li>
+<li><p>键字： 首页 最新动态 新手指南 舞曲音乐 下载中心 经典文章 玩家风采 装备购买 站内流言 友情连接 本站论坛挖掘鸡的关键字 添 setup.asp</p>
+</li>
+<li><p>VBulletin 论坛的数据库默认数据库地址! /includes/functions.php 工具: 1.网站猎手 下载地址:百度 Google! 2.Google 关键字: Powered by: vBulletin Version 3.0.1 Powered by: vBulletin Version 3.0.2 Powered by: vBulletin Version 3.0.3 其中一个就可以了</p>
+</li>
+<li><p>1.打开百度或 GOOGLE 搜索，输入 powered by comersus ASP shopping cart open source 。 这是一个商场系统。 2.网站的最底部分，有个 Comersus Open Technologies LC 。打开看下~~comersus 系统~ 猜到,comersus.mdb. 是数据库名数据库都是放在 database/ 后的, 所以 database/comersus.mdb comersus_listCategoriesTree.asp 换成 database/comersus.mdb ，不能下载。那样把前一个 ‘’store/‘’除去，再加上 database/comersus.mdb 试试</p>
+</li>
+<li><p>无忧传奇官方站点程序。 1.后台管理地址： <a href="http://您的域名" target="_blank" rel="external">http://您的域名</a> /msmiradmin/ 2.默认后台管理帐号： msmir 3.默认后台管理密码： msmirmsmir 数据库文件为 <a href="http://您的域名" target="_blank" rel="external">http://您的域名</a> /msmirdata/msmirArticle.mdb 数据库连接文件为 <strong><strong><em>*</em></strong></strong>/Conn.asp</p>
+</li>
+<li><p>百度里输入 /skins/default/</p>
+</li>
+<li><p>利用挖掘机关键机:power by Discuz 路径:/wish.php 配合: Discuz!论坛 wish.php 远程包含漏洞 工具使用</p>
+</li>
+<li><p>上传漏洞. 工具 : Domain3.5 网站猎手 1.5 版关键字 powered by mypower 检测的页面或文件插入 upfile_photo.asp</p>
+</li>
+<li><p>新云漏洞这个漏洞 ACCESS 和 SQL 版通吃。 Google 搜索关键字 “关于本站 - 网站帮助 - 广告合作 - 下载声明 - 友情连接 - 网站地图 - 管理登录” 把 flash/downfile.asp?url=uploadfile/../../conn.asp 提交到网站根目录。就可以下载 conn.asp 以源码，软件等下载站居多。大家时常碰到数据库如果前面或者中间+了# 可以用%23 替换就可以下载了 \database\%23newasp.mdb 如：#xzws.mdb 改成%23xzws.mdb</p>
+</li>
+<li><p>通吃所有商城+动力上传系统使用工具:挖掘鸡 v1.1 明小子商城入侵: 关键字:选购-&gt;加入购物车-&gt;去收银台-&gt;确认收货人信息-&gt;选付款方式-&gt;选配送方式-&gt;在线支付或下单后汇款 -&gt;汇款确认-&gt;发货-&gt;完成漏洞页面:upload.asp upfile_flash.asp 动力入侵: 关键字:powered by mypower 漏洞页面:upfile_photo.asp Upfile_Soft.asp upfile_adpic.asp upfile_softpic.asp</p>
+</li>
+<li><p>动易列目录 admin_articlerecyclebin.asp inurl:admin_articlerecyclebin.asp</p>
+</li>
+<li><p>工具:网站猎手关键词:inurl:Went.asp 后缀:manage/login.asp 口令:’or’=’or’</p>
+</li>
+<li><p>入侵魔兽私服需要的工具： ASP 木马一只。 Domain3.5 明小子关键字： All Right Reserved Design:游戏联盟后台地址： admin/login.asp 数据库的地址： chngame/#chngame.mdb</p>
+</li>
+<li><p>漏洞是利用管理员 iis 设置的失误用 baidu 关键字就是比较罕见的脚本名动网: ReloadForumCache.asp Leadbbs: makealltopanc.asp BBSXP: admin_fso.asp 动易: admin_articlerecyclebin.asp</p>
+</li>
+<li><p>国外站的爆库漏洞关键字： sad Raven’s Guestbook 密码地址:/passwd.dat 后台地址:/admin.php</p>
+</li>
+<li><p>关键字：尚奈克斯后台路径 /system/manage.asp 直接传 ASP 木马</p>
+</li>
+<li><p>工具 1:网站猎手 2:大马一个关键字:切勿关闭 Cookies 功能，否则您将不能登录插入 diy.asp</p>
+</li>
+<li><p>关键字:Team5 Studio All rights reserved 默认数据库:data/team.mdb</p>
+</li>
+<li><p>工具: 挖掘机 辅臣数据库读取器关键字: 企业简介 产品展示 产品列表后缀添加: /database/myszw.mdb 后台地址: admin/Login.asp</p>
+</li>
+<li><p>关键子 XXX inurl:Nclass.asp 在”系统设置”里写个木马。会被保存到 在 config.asp 内。</p>
+</li>
+<li><p>不进后台照样拿动网 WEBSHELL data.asp?action=BackupData 动网数据库备份默认路径 36. 工具:网站猎手 WebShell 关键字:inurl:Went.asp 后缀:manage/login.asp 弱口令:’or’=’or’</p>
+</li>
+<li><p>入侵雷池新闻发布系统关键字:leichinews 去掉 leichinews 后面的. 打上:admin/uploadPic.asp?actionType=mod&amp;picName=xuanran.asp 再上传马….. 进访问 uppic anran.asp 登陆马.</p>
+</li>
+<li><p>一、通过 GOOGLE 搜索找大量注入点关键字： asp?id=1 gov.jp/ asp?id= 页数： 100 语言：想入侵哪个国家就填什么语言吧</p>
+</li>
+<li><p>关键字： Powered by:94KKBBS 2005 利用密码找回功能 找回 admin 提问:ddddd 回答:ddddd</p>
+</li>
+<li><p>关键字:<strong>**</strong> inurl:readnews.asp 把最后一个 /改成%5c ,直接暴库,看密码,进后台随便添加个新闻 在标题输入我们的一句话木马</p>
+</li>
+<li><p>工具:一句话木马 BBsXp 5.0 sp1 管理员猜解器关键词:powered by bbsxp5.00 进后台,备份一句话马!</p>
+</li>
+<li><p>关键字：程序核心： BJXSHOP 网上开店专家 后台:/admin</p>
+</li>
+</ol>
+<font color="gray">&lt;转V2EX&gt;</font>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/12/03/hacking/" data-id="cj4quikw20008ne5soovaacul" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安全/">安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/黑客/">黑客</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/03/vultr-shdowsocks-Debian/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Vps Vultr Debian系统搭建Shadowsocks
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/30/meeting/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">我的开会法则</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Objective-C/">Objective-C</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vps/">Vps</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能/">性能</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能优化/">性能优化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Books/">Books</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Digitalocean/">Digitalocean</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dropbox/">Dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FinalSpeed/">FinalSpeed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meeting/">Meeting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vps/">Vps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vultr/">Vultr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/">Work</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/">next</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sidebar/">sidebar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后端开发/">后端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/极路由/">极路由</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美剧/">美剧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动发布/">自动发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/词/">词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑客/">黑客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Books/" style="font-size: 10px;">Books</a> <a href="/tags/Debian/" style="font-size: 10px;">Debian</a> <a href="/tags/Digitalocean/" style="font-size: 10px;">Digitalocean</a> <a href="/tags/Dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tags/FinalSpeed/" style="font-size: 10px;">FinalSpeed</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/Meeting/" style="font-size: 10px;">Meeting</a> <a href="/tags/Movie/" style="font-size: 10px;">Movie</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Shadowsocks/" style="font-size: 16.67px;">Shadowsocks</a> <a href="/tags/TV/" style="font-size: 10px;">TV</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Vps/" style="font-size: 20px;">Vps</a> <a href="/tags/Vultr/" style="font-size: 10px;">Vultr</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/next/" style="font-size: 10px;">next</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/sidebar/" style="font-size: 10px;">sidebar</a> <a href="/tags/后端开发/" style="font-size: 10px;">后端开发</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/极路由/" style="font-size: 10px;">极路由</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a> <a href="/tags/美剧/" style="font-size: 10px;">美剧</a> <a href="/tags/自动发布/" style="font-size: 10px;">自动发布</a> <a href="/tags/词/" style="font-size: 10px;">词</a> <a href="/tags/黑客/" style="font-size: 10px;">黑客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/05/spark/">Spark：一个高效的分布式计算系统</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/05/docker-develop/">利用Docker构建开发环境</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/05/norm/">创业公司的这些问题…其实是常态</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/28/mac-ubuntu-finalspeed/">FinalSpeed搭建配置</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/25/python-mysql/">Python操作Mysql</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

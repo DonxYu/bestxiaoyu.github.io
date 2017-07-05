@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>深入理解Objective-C：方法缓存 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="摘要只要用到Objective-C，我们每天都会跟方法调用打交道。我们都知道Objective-C的方法决议是动态的，但是在底层一个方法究竟是怎么找到的，方法缓存又是怎么运作的却鲜为人知。本文主要从源码角度探究了Objective-C在runtime层的方法决议（Method resolving）过程和方法缓存（Method cache）的实现。 简介本文作者来自美团酒店旅游事业群iOS研发组。我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解Objective-C：方法缓存">
+<meta property="og:url" content="http://yoursite.com/2015/08/12/DiveIntoMethodCache/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="摘要只要用到Objective-C，我们每天都会跟方法调用打交道。我们都知道Objective-C的方法决议是动态的，但是在底层一个方法究竟是怎么找到的，方法缓存又是怎么运作的却鲜为人知。本文主要从源码角度探究了Objective-C在runtime层的方法决议（Method resolving）过程和方法缓存（Method cache）的实现。 简介本文作者来自美团酒店旅游事业群iOS研发组。我">
+<meta property="og:updated_time" content="2016-03-04T16:38:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解Objective-C：方法缓存">
+<meta name="twitter:description" content="摘要只要用到Objective-C，我们每天都会跟方法调用打交道。我们都知道Objective-C的方法决议是动态的，但是在底层一个方法究竟是怎么找到的，方法缓存又是怎么运作的却鲜为人知。本文主要从源码角度探究了Objective-C在runtime层的方法决议（Method resolving）过程和方法缓存（Method cache）的实现。 简介本文作者来自美团酒店旅游事业群iOS研发组。我">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-DiveIntoMethodCache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/12/DiveIntoMethodCache/" class="article-date">
+  <time datetime="2015-08-12T08:00:56.000Z" itemprop="datePublished">2015-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Objective-C/">Objective-C</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入理解Objective-C：方法缓存
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>摘要<br>只要用到Objective-C，我们每天都会跟方法调用打交道。我们都知道Objective-C的方法决议是动态的，但是在底层一个方法究竟是怎么找到的，方法缓存又是怎么运作的却鲜为人知。本文主要从源码角度探究了Objective-C在runtime层的方法决议（Method resolving）过程和方法缓存（Method cache）的实现。</p>
+<p>简介<br>本文作者来自美团酒店旅游事业群iOS研发组。我们致力于创造价值、提升效率、追求卓越。欢迎大家加入我们（简历请发送到邮箱 majia03@meituan.com ）。</p>
+<p>本文系学习Objective-C的runtime源码时整理所成，主要剖析了Objective-C在runtime层的方法决议过程和方法缓存，内容包括：</p>
+<p>从消息决议说起<br>缓存为谁而生<br>追本溯源，何为方法缓存<br>缓存和散列<br>十万个为什么<br>缓存 - 性能优化的万金油？<br>优化，永无止境<br>从消息决议说起<br>我们都知道，在Objective-C里调用一个方法是这样的：</p>
+<p>[object methodA];<br>这表示我们想去调用object的methodA。<br>但是在Objective-C里面调用一个方法到底意味着什么呢，是否和C++一样，任何一个非虚方法都会被编译成一个唯一的符号，在调用的时候去查找符号表，找到这个方法然后调用呢？<br>答案是否定的。在Objective-C里面调用一个方法的时候，runtime层会将这个调用翻译成</p>
+<p>objc_msgSend(id self, SEL op, …)<br>而objc_msgSend具体又是如何分发的呢？ 我们来看下runtime层objc_msgSend的源码。<br>在objc-msg-arm.s中，objc_msgSend的代码如下：<br>（ps：Apple为了高度优化objc_msgSend的性能，这个文件是汇编写成的，不过即使我们不懂汇编，详尽的注释也可以让我们一窥其真面目）</p>
+<p>ENTRY objc_msgSend</p>
+<h1 id="check-whether-receiver-is-nil"><a href="#check-whether-receiver-is-nil" class="headerlink" title="check whether receiver is nil"></a>check whether receiver is nil</h1><p>teq     a1, #0<br>    beq     LMsgSendNilReceiver</p>
+<h1 id="save-registers-and-load-receiver’s-class-for-CacheLookup"><a href="#save-registers-and-load-receiver’s-class-for-CacheLookup" class="headerlink" title="save registers and load receiver’s class for CacheLookup"></a>save registers and load receiver’s class for CacheLookup</h1><p>stmfd   sp!, {a4,v1}<br>ldr     v1, [a1, #ISA]</p>
+<h1 id="receiver-is-non-nil-search-the-cache"><a href="#receiver-is-non-nil-search-the-cache" class="headerlink" title="receiver is non-nil: search the cache"></a>receiver is non-nil: search the cache</h1><p>CacheLookup a2, v1, LMsgSendCacheMiss</p>
+<h1 id="cache-hit-imp-in-ip-and-CacheLookup-returns-with-nonstret-eq-set-restore-registers-and-call"><a href="#cache-hit-imp-in-ip-and-CacheLookup-returns-with-nonstret-eq-set-restore-registers-and-call" class="headerlink" title="cache hit (imp in ip) and CacheLookup returns with nonstret (eq) set, restore registers and call"></a>cache hit (imp in ip) and CacheLookup returns with nonstret (eq) set, restore registers and call</h1><p>ldmfd   sp!, {a4,v1}<br>bx      ip</p>
+<h1 id="cache-miss-go-search-the-method-lists"><a href="#cache-miss-go-search-the-method-lists" class="headerlink" title="cache miss: go search the method lists"></a>cache miss: go search the method lists</h1><p>LMsgSendCacheMiss:<br>ldmfd sp!, {a4,v1}<br>b _objc_msgSend_uncached</p>
+<p>LMsgSendNilReceiver:<br>    mov     a2, #0<br>    bx      lr</p>
+<p>LMsgSendExit:<br>END_ENTRY objc_msgSend</p>
+<p>STATIC_ENTRY objc_msgSend_uncached</p>
+<h1 id="Push-stack-frame"><a href="#Push-stack-frame" class="headerlink" title="Push stack frame"></a>Push stack frame</h1><p>stmfd sp!, {a1-a4,r7,lr}<br>add     r7, sp, #16</p>
+<h1 id="Load-class-and-selector"><a href="#Load-class-and-selector" class="headerlink" title="Load class and selector"></a>Load class and selector</h1><p>ldr a3, [a1, #ISA] /<em> class = receiver-&gt;isa  </em>/<br>/<em> selector already in a2 </em>/<br>/<em> receiver already in a1 </em>/</p>
+<h1 id="Do-the-lookup"><a href="#Do-the-lookup" class="headerlink" title="Do the lookup"></a>Do the lookup</h1><p>MI_CALL_EXTERNAL(__class_lookupMethodAndLoadCache3)<br>MOVE    ip, a1</p>
+<h1 id="Prep-for-forwarding-Pop-stack-frame-and-call-imp"><a href="#Prep-for-forwarding-Pop-stack-frame-and-call-imp" class="headerlink" title="Prep for forwarding, Pop stack frame and call imp"></a>Prep for forwarding, Pop stack frame and call imp</h1><p>teq v1, v1 /<em> set nonstret (eq) </em>/<br>ldmfd sp!, {a1-a4,r7,lr}<br>bx ip<br>从上述代码中可以看到，objc_msgSend（就arm平台而言）的消息分发分为以下几个步骤：</p>
+<p>判断receiver是否为nil，也就是objc_msgSend的第一个参数self，也就是要调用的那个方法所属对象<br>从缓存里寻找，找到了则分发，否则<br>利用objc-class.mm中_class_lookupMethodAndLoadCache3（为什么有个这么奇怪的方法。本文末尾会解释）方法去寻找selector</p>
+<p>如果支持GC，忽略掉非GC环境的方法（retain等）<br>从本class的method list寻找selector，如果找到，填充到缓存中，并返回selector，否则<br>寻找父类的method list，并依次往上寻找，直到找到selector，填充到缓存中，并返回selector，否则<br>调用_class_resolveMethod，如果可以动态resolve为一个selector，不缓存，方法返回，否则<br>转发这个selector，否则<br>报错，抛出异常<br>缓存为谁而生<br>从上面的分析中我们可以看到，当一个方法在比较“上层”的类中，用比较“下层”（继承关系上的上下层）对象去调用的时候，如果没有缓存，那么整个查找链是相当长的。就算方法是在这个类里面，当方法比较多的时候，每次都查找也是费事费力的一件事情。<br>考虑下面的一个调用过程：</p>
+<p>for ( int i = 0; i &lt; 100000; ++i) {<br>    MyClass *myObject = myObjects[i];<br>    [myObject methodA];<br>}<br>当我们需要去调用一个方法数十万次甚至更多地时候，查找方法的消耗会变的非常显著。<br>就算我们平常的非大规模调用，除非一个方法只会调用一次，否则缓存都是有用的。在运行时，那么多对象，那么多方法调用，节省下来的时间也是非常可观的。</p>
+<p>追本溯源，何为方法缓存<br>本着源码面前，了无秘密的原则，我们看下源码中的方法缓存到底是什么，在objc-cache.mm中，objc_cache的定义如下：</p>
+<p>struct objc_cache {<br>    uintptr_t mask;            /<em> total = mask + 1 </em>/<br>    uintptr_t occupied;<br>    cache_entry *buckets[1];<br>};<br>嗯，objc_cache的定义看起来很简单，它包含了下面三个变量：<br>1)、mask：可以认为是当前能达到的最大index（从0开始的），所以缓存的size（total）是mask+1<br>2)、occupied：被占用的槽位，因为缓存是以散列表的形式存在的，所以会有空槽，而occupied表示当前被占用的数目<br>3)、buckets：用数组表示的hash表，cache_entry类型，每一个cache_entry代表一个方法缓存<br>(buckets定义在objc_cache的最后，说明这是一个可变长度的数组)</p>
+<p>而cache_entry的定义如下：</p>
+<p>typedef struct {<br>    SEL name;     // same layout as struct old_method<br>    void *unused;<br>    IMP imp;  // same layout as struct old_method<br>} cache_entry;<br>cache_entry定义也包含了三个字段，分别是：<br>1)、name，被缓存的方法名字<br>2)、unused，保留字段，还没被使用。<br>3)、imp，方法实现</p>
+<p>缓存和散列<br>缓存的存储使用了散列表。<br>为什么要用散列表呢？因为散列表检索起来更快，我们来看下是方法缓存如何散列和检索的：</p>
+<p>// Scan for the first unused slot and insert there.<br>// There is guaranteed to be an empty slot because the<br>// minimum size is 4 and we resized at 3/4 full.<br>buckets = (cache_entry **)cache-&gt;buckets;<br>for (index = CACHE_HASH(sel, cache-&gt;mask);<br>     buckets[index] != NULL;<br>     index = (index+1) &amp; cache-&gt;mask)<br>{<br>    // empty<br>}<br>buckets[index] = entry;<br>这是往方法缓存里存放一个方法的代码片段，我们可以看到sel被散列后找到一个空槽放在buckets中，而CACHE_HASH的定义如下：</p>
+<p>#define CACHE_HASH(sel, mask) (((uintptr_t)(sel)&gt;&gt;2) &amp; (mask))<br>这段代码就是利用了sel的指针地址和mask做了一下简单计算得出的。<br>而从散列表取缓存则是利用汇编语言写成的（是为了高度优化objc_msgSend而使用汇编的）。我们看objc-msg-arm.mm 里面的CacheLookup方法：</p>
+<p>.macro CacheLookup /<em> selReg, classReg, missLabel </em>/</p>
+<p> MOVE r9, $0, LSR #2          /<em> index = (sel &gt;&gt; 2) </em>/<br> ldr     a4, [$1, #CACHE]        /<em> cache = class-&gt;cache </em>/<br> add     a4, a4, #BUCKETS        /<em> buckets = &amp;cache-&gt;buckets </em>/</p>
+<p>/<em> search the cache </em>/<br>/<em> a1=receiver, a2 or a3=sel, r9=index, a4=buckets, $1=method </em>/<br>1:<br> ldr     ip, [a4, #NEGMASK]      /<em> mask = cache-&gt;mask </em>/<br> and     r9, r9, ip              /<em> index &amp;= mask           </em>/<br> ldr     $1, [a4, r9, LSL #2]    /<em> method = buckets[index] </em>/<br> teq     $1, #0                  /<em> if (method == NULL)     </em>/<br> add     r9, r9, #1              /<em> index++                 </em>/<br> beq     $2                      /<em>     goto cacheMissLabel </em>/</p>
+<p> ldr     ip, [$1, #METHOD_NAME]  /<em> load method-&gt;method_name        </em>/<br> teq     $0, ip                  /<em> if (method-&gt;method_name != sel) </em>/<br> bne     1b                      /<em>     retry                       </em>/</p>
+<p>/<em> cache hit, $1 == method triplet address </em>/<br>/<em> Return triplet in $1 and imp in ip      </em>/<br> ldr     ip, [$1, #METHOD_IMP]   /<em> imp = method-&gt;method_imp </em>/</p>
+<p>.endmacro<br>虽然是汇编，但是注释太详尽了，理解起来并不难，还是求hash，去buckets里找，找不到按照hash冲突的规则继续向下，直到最后。</p>
+<p>十万个为什么<br>了解了方法缓存的定义之后，我们提出几个问题并一一解答</p>
+<p>方法缓存存在什么地方？<br>让我们去翻看类的定义，在Objective-C 2.0中，Class的定义大致是这样的（见objc-runtime.mm）</p>
+<p>  struct _class_t {<br>  struct _class_t <em>isa;<br>  struct _class_t </em>superclass;<br>  void <em>cache;<br>  void </em>vtable;<br>  struct _class_ro_t *ro;<br>  };<br>我们看到在类的定义里就有cache字段，没错，类的所有缓存都存在metaclass上，所以每个类都只有一份方法缓存，而不是每一个类的object都保存一份。<br>父类方法的缓存只存在父类么，还是子类也会缓存父类的方法？<br>在第一节对objc_msgSend的追溯中我们可以看到，即便是从父类取到的方法，也会存在类本身的方法缓存里。而当用一个父类对象去调用那个方法的时候，也会在父类的metaclass里缓存一份。<br>类的方法缓存大小有没有限制？<br>要回答这个问题，我们需要再看一下源码，在objc-cache.mm有一个变量定义如下：</p>
+<p>  /* When _class_slow_grow is non-zero, any given cache is actually grown</p>
+<ul>
+<li>only on the odd-numbered times it becomes full; on the even-numbered</li>
+<li>times, it is simply emptied and re-used.  When this flag is zero,</li>
+<li>caches are grown every time. */<br>static const int _class_slow_grow = 1;<br>其实不用再看进一步的代码片段，仅从注释我们就可以看到问题的答案。注释中说明，当_class_slow_grow是非0值的时候，只有当方法缓存第奇数次满（使用的槽位超过3/4）的时候，方法缓存的大小才会增长（会清空缓存，否则hash值就不对了）；当第偶数次满的时候，方法缓存会被清空并重新利用。 如果_class_slow_grow值为0，那么每一次方法缓存满的时候，其大小都会增长。<br>所以单就问题而言，答案是没有限制，虽然这个值被设置为1，方法缓存的大小增速会慢一点，但是确实是没有上限的。<br>为什么类的方法列表不直接做成散列表呢，做成list，还要单独缓存，多费事？<br>这个问题么，我觉得有以下三个原因：</li>
+</ul>
+<p>散列表是没有顺序的，Objective-C的方法列表是一个list，是有顺序的；Objective-C在查找方法的时候会顺着list依次寻找，并且category的方法在原始方法list的前面，需要先被找到，如果直接用hash存方法，方法的顺序就没法保证。<br>list的方法还保存了除了selector和imp之外其他很多属性<br>散列表是有空槽的，会浪费空间<br>缓存 - 性能优化的万金油？<br>非也，就算有了有了Objective-C本身的方法缓存，我们还是有很多调用方法的优化空间，对于这件事情，这篇文章讲的非常详细，大家可以自行移步观摩<a href="http://www.mulle-kybernetik.com/artikel/Optimization/opti-3-imp-deluxe.html" target="_blank" rel="external">http://www.mulle-kybernetik.com/artikel/Optimization/opti-3-imp-deluxe.html</a> （强烈推荐，虽然我们一般不会遇到需要这么强度优化的地方，但是这种精神和思想是值得我们学习的）</p>
+<p>优化，永无止境<br>在文章末尾，我们再来回答一下第一节提出的问题：“为什么会有_class_lookupMethodAndLoadCache3这个方法？”<br>这个方法的实现如下所示：</p>
+<p>/<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p>
+<ul>
+<li>_class_lookupMethodAndLoadCache.</li>
+<li>Method lookup for dispatchers ONLY. OTHER CODE SHOULD USE lookUpImp().</li>
+<li>This lookup avoids optimistic cache scan because the dispatcher</li>
+<li>already tried that.<br><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>/<br>IMP _class_lookupMethodAndLoadCache3(id obj, SEL sel, Class cls)<br>{<br>  return lookUpImpOrForward(cls, sel, obj, <pre><code>YES/*initialize*/, NO/*cache*/, YES/*resolver*/);
+</code></pre>}<br>如果单纯看方法名，这个方法应该会从缓存和方法列表中查找一个方法，但是如第一节所讲，在调用这个方法之前，我们已经是从缓存无法找到这个方法了，所以这个方法避免了再去扫描缓存查找方法的过程，而是直接从方法列表找起。从Apple代码的注释，我们也完全可以了解这一点。不顾一切地追求完美和性能，是一种品质。</li>
+</ul>
+<p>后记<br>本文是Objective-C runtime源码研究的第二篇，主要对Objective-C的方法决议和方法缓存做了剖析。runtime的源代码可以在 <a href="http://www.opensource.apple.com/tarballs/" target="_blank" rel="external">http://www.opensource.apple.com/tarballs/</a> 下载。如有错误，敬请指正。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/12/DiveIntoMethodCache/" data-id="cj4quikvc0000ne5s5fqbv8kt" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/23/npm-shrinkwrap/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          使用 npm shrinkwrap 来管理项目依赖
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/05/practice-nginx/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">《实战 Nginx》 读后</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Books/">Books</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Objective-C/">Objective-C</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vps/">Vps</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/npm/">npm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能/">性能</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能优化/">性能优化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Books/">Books</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Digitalocean/">Digitalocean</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dropbox/">Dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FinalSpeed/">FinalSpeed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Meeting/">Meeting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/">Shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vps/">Vps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vultr/">Vultr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/">Work</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/">next</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sidebar/">sidebar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后端开发/">后端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/极路由/">极路由</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美剧/">美剧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动发布/">自动发布</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/词/">词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑客/">黑客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Books/" style="font-size: 10px;">Books</a> <a href="/tags/Debian/" style="font-size: 10px;">Debian</a> <a href="/tags/Digitalocean/" style="font-size: 10px;">Digitalocean</a> <a href="/tags/Dropbox/" style="font-size: 10px;">Dropbox</a> <a href="/tags/FinalSpeed/" style="font-size: 10px;">FinalSpeed</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/Meeting/" style="font-size: 10px;">Meeting</a> <a href="/tags/Movie/" style="font-size: 10px;">Movie</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/Shadowsocks/" style="font-size: 16.67px;">Shadowsocks</a> <a href="/tags/TV/" style="font-size: 10px;">TV</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Vps/" style="font-size: 20px;">Vps</a> <a href="/tags/Vultr/" style="font-size: 10px;">Vultr</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/next/" style="font-size: 10px;">next</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/sidebar/" style="font-size: 10px;">sidebar</a> <a href="/tags/后端开发/" style="font-size: 10px;">后端开发</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/极路由/" style="font-size: 10px;">极路由</a> <a href="/tags/爬虫/" style="font-size: 13.33px;">爬虫</a> <a href="/tags/美剧/" style="font-size: 10px;">美剧</a> <a href="/tags/自动发布/" style="font-size: 10px;">自动发布</a> <a href="/tags/词/" style="font-size: 10px;">词</a> <a href="/tags/黑客/" style="font-size: 10px;">黑客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/05/spark/">Spark：一个高效的分布式计算系统</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/05/docker-develop/">利用Docker构建开发环境</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/05/norm/">创业公司的这些问题…其实是常态</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/28/mac-ubuntu-finalspeed/">FinalSpeed搭建配置</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/25/python-mysql/">Python操作Mysql</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
