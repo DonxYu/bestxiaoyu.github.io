@@ -49,7 +49,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="DonxYu's Blog" type="application/atom+xml" />
 
 
 
@@ -64,8 +64,8 @@
 <meta name="description" content="管理依赖是一个复杂软件开发过程中必定会遇到的问题。 在Node.js项目开发的时候，我们也经常需要安装和升级对应的依赖。虽然 npm 以及语意化的版本号 (semantic versioning, semver) 让开发过程中依赖的获取和升级变得非常容易， 但不严格的版本号限制，也带来了版本号的不确定性。主要的问题可能有三个： npm 建议使用 semver 的应用程序版本，但这也完全依赖第三方包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 npm shrinkwrap 来管理项目依赖">
-<meta property="og:url" content="http://yoursite.com/2015/10/23/npm-shrinkwrap/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://bestxiaoyu.com/2015/10/23/npm-shrinkwrap/index.html">
+<meta property="og:site_name" content="DonxYu&#39;s Blog">
 <meta property="og:description" content="管理依赖是一个复杂软件开发过程中必定会遇到的问题。 在Node.js项目开发的时候，我们也经常需要安装和升级对应的依赖。虽然 npm 以及语意化的版本号 (semantic versioning, semver) 让开发过程中依赖的获取和升级变得非常容易， 但不严格的版本号限制，也带来了版本号的不确定性。主要的问题可能有三个： npm 建议使用 semver 的应用程序版本，但这也完全依赖第三方包">
 <meta property="og:updated_time" content="2016-03-04T16:37:30.000Z">
 <meta name="twitter:card" content="summary">
@@ -83,15 +83,15 @@
     motion: true,
     duoshuo: {
       userId: 0,
-      author: 'Author'
+      author: '博主'
     }
   };
 </script>
 
-  <title> 使用 npm shrinkwrap 来管理项目依赖 | Hexo </title>
+  <title> 使用 npm shrinkwrap 来管理项目依赖 | DonxYu's Blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -127,11 +127,11 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Hexo</span>
+      <span class="site-title">DonxYu's Blog</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle"></p>
+  <p class="site-subtitle">What Doesn't Kill You Makes You Stronger.</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -154,7 +154,7 @@
             
               <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -164,7 +164,7 @@
             
               <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
-            Kategorien
+            分类
           </a>
         </li>
       
@@ -174,7 +174,7 @@
             
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -184,7 +184,7 @@
             
               <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -214,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
             
-            Über
+            关于
           </a>
         </li>
       
@@ -277,7 +277,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-10-23T17:30:54+08:00" content="2015-10-23">
               2015-10-23
             </time>
@@ -289,7 +289,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/npm/" itemprop="url" rel="index">
@@ -325,7 +325,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-eye"></i>
                 </span>
-                <span class="post-meta-item-text">visitors </span>
+                <span class="post-meta-item-text">阅读次数 </span>
                 <span class="leancloud-visitors-count"></span>
                </span>
            
@@ -479,7 +479,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/10/23/npm-shrinkwrap/"
-           data-title="使用 npm shrinkwrap 来管理项目依赖" data-url="http://yoursite.com/2015/10/23/npm-shrinkwrap/">
+           data-title="使用 npm shrinkwrap 来管理项目依赖" data-url="http://bestxiaoyu.com/2015/10/23/npm-shrinkwrap/">
       </div>
     
   </div>
@@ -505,10 +505,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -517,15 +517,15 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://cdn.bestxiaoyu.com/images/avatar.png"
-               alt="John Doe" />
-          <p class="site-author-name" itemprop="name">John Doe</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+               alt="DonxYu" />
+          <p class="site-author-name" itemprop="name">DonxYu</p>
+          <p class="site-description motion-element" itemprop="description">R&D Management . Web . Redis . Mysql . Linux</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">26</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
           
@@ -533,7 +533,7 @@
             <div class="site-state-item site-state-categories">
               <a href="/categories">
                 <span class="site-state-item-count">15</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-name">分类</span>
               </a>
             </div>
           
@@ -542,7 +542,7 @@
             <div class="site-state-item site-state-tags">
               <a href="/tags">
                 <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
           
@@ -634,7 +634,7 @@
               
             
             
-              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -670,12 +670,12 @@
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe | R&D Management . Web . Redis . Mysql . Linux . 负载均衡 . 高可用</span>
+  <span class="author" itemprop="copyrightHolder">DonxYu | R&D Management . Web . Redis . Mysql . Linux . 负载均衡 . 高可用</span>
 </div>
 
 <!-- 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
 </div>
 -->
 
@@ -702,7 +702,7 @@
 
 <!--
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
