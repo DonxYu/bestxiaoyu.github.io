@@ -1,0 +1,1074 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="google-site-verification" content="OJ2TbD9rLSudwdaBVzMKcciWRzXvjcf-XW-xgHPn1RI" />
+<meta name="baidu-site-verification" content="U0HWeKbBVk" />
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+<!-- 
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+-->
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Shadowsocks,Ubuntu,GitHub,敏捷学习方法," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://cdn.bestxiaoyu.com/images/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="「持续行动，持续反思，持续进步。」—— via. 敏捷学习宣言   需要好多年才能懂得，最好不是去震惊世界，而是要像易卜生所说的，生活在世界上。    我们都一样，渴望着建树功勋、改变世界，可是伴随着年岁的增长，却发现想要实现的梦想依然那么遥远，而时间却依然残酷得流逝着，不会仅仅因为「你」而发生丝毫的改变。如《奇特的一生》当中所言，我对时间始终充满着敬畏之心，最好的方式也不过是奢求时间能够跟自己">
+<meta name="keywords" content="Shadowsocks,Ubuntu,GitHub,敏捷学习方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 GitHub 的敏捷学习方法之道与术">
+<meta property="og:url" content="http://yoursite.com/2017/07/10/基于 GitHub 的敏捷学习方法之道与术/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="「持续行动，持续反思，持续进步。」—— via. 敏捷学习宣言   需要好多年才能懂得，最好不是去震惊世界，而是要像易卜生所说的，生活在世界上。    我们都一样，渴望着建树功勋、改变世界，可是伴随着年岁的增长，却发现想要实现的梦想依然那么遥远，而时间却依然残酷得流逝着，不会仅仅因为「你」而发生丝毫的改变。如《奇特的一生》当中所言，我对时间始终充满着敬畏之心，最好的方式也不过是奢求时间能够跟自己">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480841415310.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1489125677512.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480844039076.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/b1916908-b1c0-11e6-9961-cb5d65ab893a.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480845918534.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480844770670.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/b6ccb2e8-b1bf-11e6-9702-755d137ab570.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480845577392.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480846952139.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480849332535.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480858232002.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480848185821.png">
+<meta property="og:updated_time" content="2017-07-10T07:15:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于 GitHub 的敏捷学习方法之道与术">
+<meta name="twitter:description" content="「持续行动，持续反思，持续进步。」—— via. 敏捷学习宣言   需要好多年才能懂得，最好不是去震惊世界，而是要像易卜生所说的，生活在世界上。    我们都一样，渴望着建树功勋、改变世界，可是伴随着年岁的增长，却发现想要实现的梦想依然那么遥远，而时间却依然残酷得流逝着，不会仅仅因为「你」而发生丝毫的改变。如《奇特的一生》当中所言，我对时间始终充满着敬畏之心，最好的方式也不过是奢求时间能够跟自己">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/10/基于%20GitHub%20的敏捷学习方法之道与术/%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480841415310.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","sidebar":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 基于 GitHub 的敏捷学习方法之道与术 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d59a787f34c5e2e3e04ca5dd6b2bd996";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+            
+            书单
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基于 GitHub 的敏捷学习方法之道与术
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2017-07-10T18:19:38+08:00" content="2017-07-10">
+              2017-07-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/GitHub/" itemprop="url" rel="index">
+                    <span itemprop="name">GitHub</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+	
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/10/基于 GitHub 的敏捷学习方法之道与术/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/10/基于 GitHub 的敏捷学习方法之道与术/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+
+          
+
+	
+           
+              <span id="/2017/07/10/基于 GitHub 的敏捷学习方法之道与术/" class="leancloud_visitors" data-flag-title="基于 GitHub 的敏捷学习方法之道与术">
+                &nbsp; | &nbsp;
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-eye"></i>
+                </span>
+                <span class="post-meta-item-text">visitors </span>
+                <span class="leancloud-visitors-count"></span>
+               </span>
+           
+	
+	</div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>「持续行动，持续反思，持续进步。」—— via. 敏捷学习宣言  </p>
+<p>需要好多年才能懂得，最好不是去震惊世界，而是要像易卜生所说的，生活在世界上。  </p>
+</blockquote>
+<p>我们都一样，渴望着建树功勋、改变世界，可是伴随着年岁的增长，却发现想要实现的梦想依然那么遥远，而时间却依然残酷得流逝着，不会仅仅因为「你」而发生丝毫的改变。如《奇特的一生》当中所言，我对时间始终充满着敬畏之心，最好的方式也不过是奢求时间能够跟自己做朋友，伴随着我这也许注定朴实无华的一生，共同成长。</p>
+<p>在我们的一生所能做的事情里边儿，睡眠占去 1/3，此生只剩 2/3，除去非做不可的 <a href="http://blog.jimmylv.info/2015-09-05-periodically-anxiety/#title0" target="_blank" rel="external">基本生活维护成本</a> 过后，剩下的时间要么选择浪费而荒度此生，要么选择目标而奋力向前，让这一生不留遗憾。Follow your heart，你需要找到一些愿意为其付诸终身的「目标」，以这样的姿态「生活在这世界上」。</p>
+<h3 id="敏捷与个人成长"><a href="#敏捷与个人成长" class="headerlink" title="敏捷与个人成长"></a>敏捷与个人成长</h3><p>就像软件开发一样，一个人的成长也应该要有自己的方法论。人的一生若是顺风顺水一成不变的话，那未免太无趣了，正是由于世界的未知在等着我们去探索，不一样的经历才会让人感到惊喜和有趣。想做的事情永远都不会嫌多，就像柳比歇夫最开始是研究生物学的，却在科学的道路上越走越远，进而研究起了数学、物理、哲学，甚至于美学，而更关键的是，他在每一方面都做出了很大贡献并且留下了诸多著作。</p>
+<p>时间充当着 Product Owner 的角色在不断着向你提出各种各样的需求，敏捷当中最重要的一大前提就是「拥抱变化」，而在「 <a href="https://github.com/JimmyLv/jimmylv.github.io/issues/85" target="_blank" rel="external">记录时间这件小事儿</a> 」里面我提到的 GTD 流程便可以用于处理这源源不断的需求，即收集、整理、执行、回顾，对应到敏捷当中的几大会议显然也可以由个人完成，自己就是自己的 IM &amp; PM，当然也是 BA &amp; Dev &amp; QA。（当然不用担心人格分裂，😂）</p>
+<h2 id="实践之术"><a href="#实践之术" class="headerlink" title="实践之术"></a>实践之术</h2><blockquote>
+<p>我都没想到写着写着怎么就把开头写成了鸡汤文，<a href="./wechat/emoji.jpg">捂脸</a>。但是咧，如果说前面的讲的是「道」，那么接下来就会具体到基于 GitHub 的「术」，即各种实践。  </p>
+</blockquote>
+<p>首先呢，让我们从需求出发，从市面上来寻找一款符合敏捷的学习软件，别想了，当然是没有的。对于一名程序猿来说， <strong>最理想的答案其实就是 GitHub</strong> ，作为全球最大的程序猿交友网站，GitHub 本身以及围绕 GitHub 的各种插件使得其项目管理能力其实远比你所能想象的厉害得多。</p>
+<ul>
+<li>收集：需求无时无刻，无处不在，anywhere anytime</li>
+<li>整理：as BA 即分析，Elaboration &amp; Estimation &amp; IPM =&gt; 确定 MVP &amp; Efforts</li>
+<li>执行：as Dev &amp; QA，Developing &amp; Testing &amp; Review/Sign-Off</li>
+<li>回顾：Retrospection，Introspection，持续反思，持续进步…<h3 id="通过-GitHub-Issues-收集需求"><a href="#通过-GitHub-Issues-收集需求" class="headerlink" title="通过 GitHub Issues 收集需求"></a>通过 GitHub Issues 收集需求</h3></li>
+</ul>
+<p>首先你可以给自己建一个 GitHub 仓库作为主页，比如我的  <a href="https://github.com/JimmyLv/jimmylv.github.io" target="_blank" rel="external">JimmyLv/jimmylv.github.io: Agile Learning based on GitHub issues</a>  其实最开始就是从 <a href="http://blog.jimmylv.info/" target="_blank" rel="external">个人博客</a> 的主仓库发展而来。那么，如何快速得收纳自己的想法呢？以解决问题为导向，当然就是有什么需求就直接给自己的 repo 建一个 issue 作为 Story Card，然后了却这个需求的最终形态就是 close 掉这个 Issue，比如我要写这篇文章就始于这个 issue： <a href="https://github.com/JimmyLv/jimmylv.github.io/issues/36" target="_blank" rel="external">基于 GitHub 的敏捷学习方法总结 · Issue #36 · JimmyLv/jimmylv.github.io</a> 。</p>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480841415310.png" alt=""><br>GitHub issues 的进阶用法</p>
+<p>与此同时，新建 issue 还有更高级的用法，也就是通过  <a href="https://help.github.com/articles/creating-an-issue-template-for-your-repository/" target="_blank" rel="external">ISSUE_TEMPLATE</a>  这样一个模板来新建某个 issue，从而更快地定位问题所在和解析自己的想法，最主要的是能够输出更具体的 TODOs，即下一步行动的具体内容，这个还会在后面详细解释的。</p>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1489125677512.png" alt=""></p>
+<ul>
+<li>issue 和 issue 之间是可以通过 # 相互连接的，甚至可以跨仓库，被 reference 的 issue 也会出现在另外一边的 issue 里面；</li>
+<li>而通过 #! 符号是可以在 comments 里面直接新建一个 issue 的，这在思维爆炸的时候来得特别爽快；</li>
+<li>你还可以随意艾特你的小伙伴们 @linesh-simplicity @Yaowenjie ，互相监督、互相学习或者给出 Constructive Feedback 之类的，😂；</li>
+<li>更甚至于，若是在 Intellij 里面关联了 GitHub，就可以在 git commit 信息里面直接看到你所要关联的 issues 列表了。<br>这种方式仿佛学习中的大脑，神经网络被连通了的感觉。</li>
+</ul>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480844039076.png" alt=""><br>移动端的解决方案</p>
+<p>而在移动端则可以通过  <a href="http://gitdo.io/" target="_blank" rel="external">GitDo</a>  这个 App 来轻松新建和管理自己的 Issues，没错，就是有人把 GitHub issues 做成了一个 Todos 类 App，还做得很漂亮功能很完善。只可惜不知道这软件最近为啥被下架了，伤感，我就又重新把滴答清单（TickTick）作为自己的万能收集箱了，之后再把比较重要的、需要进一步追踪的事项添加到 GitHub issues 里面来。</p>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/b1916908-b1c0-11e6-9961-cb5d65ab893a.png" alt=""></p>
+<h3 id="整理你的-GitHub-Issues"><a href="#整理你的-GitHub-Issues" class="headerlink" title="整理你的 GitHub Issues"></a>整理你的 GitHub Issues</h3><p>大胆地把 issues 作为你的个人需求列表吧，需要解决的问题可以大到做一个开源项目，或者小到读一本书、写一篇文章。对于比较大的需求，你还可以将其转化为 Epic 然后把拆分过后的小 issues 们加入到这个列表里面来。</p>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480845918534.png" alt=""><br>而 GitHub (with  <a href="https://www.zenhub.com/" target="_blank" rel="external">ZenHub</a> ) 强大的 issues 管理能力绝对会让你的迭代工作变得井井有条，使用 GitHub 新出的  <a href="https://github.com/JimmyLv/jimmylv.github.io/projects/1" target="_blank" rel="external">Projects</a>  特性或者使用 ZenHub 的  <a href="https://github.com/JimmyLv/jimmylv.github.io/issues/100#boards?repos=13273392" target="_blank" rel="external">Boards</a>  应该就可以让你瞬间有了日常敏捷工作的感觉了吧！</p>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480844770670.png" alt=""></p>
+<h3 id="计划与执行具体任务"><a href="#计划与执行具体任务" class="headerlink" title="计划与执行具体任务"></a>计划与执行具体任务</h3><p>制定迭代计划</p>
+<p>首先呢，让我们来新建一个  <a href="https://github.com/JimmyLv/jimmylv.github.io/milestones?state=open" target="_blank" rel="external">Milestone</a>  来制定计划，也就是决定在一个 Iteration 里面你需要完成哪些 issues。在这里我所制定的阶段性计划周期为一个月，当然你也可以勤快一点以 2 周作为一个 Iteration，享受一下自己的计划要完不成了这个 Milestone 就要废了，没法向「时间」这个一生的朋友交付所有需求的快感吧，🙂</p>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/b6ccb2e8-b1bf-11e6-9702-755d137ab570.png" alt=""><br>当然咯，一般我会在月初做计划的时候给自己准备专门的时间来做 Elaboration，把 Backlog 里面的卡拖到 Rethink/Plan 这一列，然后经过分析和详细输出 TODOs 以及所对应的估点 points 之后便可以将其拖到 Ready For Todo 了，一般我给自己估的点数就是完成这件事情所需要的时间，一小时即对应一个 point。</p>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480845577392.png" alt=""><br>这样你就可以愉快得选择 Filter Issues by Milestone 专注于当前 Iteration，专注于 In Progress 这一列所要做的事情，并且垂涎于 Ready For Todo 里面将要做的事情，每次做完还可以放到 Review/SignOff 里面写写对这件事情的总结和感想什么的，每次挪卡都充满了敏捷的仪式感（认真脸）。</p>
+<p>进度的把控</p>
+<p>GitHub 在 issues 里面直接集成了 Markdown 的 TODO 语法，甚至于可以在渲染过后直接拖动某个 item 进行排序，而且前面的勾选项可以直接打勾 ☑️ 标记为完成，而且完成之后这个 issue 还能直接显示完成进度；前面所提到的 Epic 也能直接显示子 issues 的完成情况即 closed 比例，两者结合起来简直不能再美好，😂</p>
+<p>比如说拿来作为读书列表的记录就很不错，每本书作为一个 issue 还可以把章节划分为具体的 TODOs，结合估点可以追踪自己看书的进度和速度，顺便在 comments 底下做个笔记也不错啊！</p>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480846952139.png" alt=""><br>专注当下</p>
+<p>而且 ZenHub 还提供了一个基于 GitHub Issues 的 Todo List，你可以只用关注 Today 这一个列表，专心于当前要完成的任务。而且更有趣的是这个 list 可以加入 GitHub 的任何 issues，也就是说是全局的，所以你就可以加入很多在 GitHub 上通过 issues 写的 blog，比如徐飞的这篇文章 <a href="https://github.com/xufei/blog/issues/38" target="_blank" rel="external">流动的数据——使用 RxJS 构造复杂单页应用的数据逻辑 · Issue #38 · xufei/blog</a> ，被我加入到了 Reading 的列表当中。</p>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480849332535.png" alt=""><br>与此同时我还会使用  <a href="https://toggl.com/" target="_blank" rel="external">Toggl</a>  来记录每个 issue 具体实施的时间，以便于在时间花费上能够获得及时的反馈。这样做会让你真切地感受到时间的流逝，而在回顾记录的时候也能够进行总结分析，从而在下一次的计划当中能够更精确地预估时间（点数）。比方说这篇文章我估了 5 个点现在已经写了 4.5 hours 了，不过这是另外一个大话题，可以参考  <a href="https://github.com/JimmyLv/jimmylv.github.io/issues/85" target="_blank" rel="external">记录时间这件小事儿</a>  这个 issue。</p>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480858232002.png" alt=""></p>
+<h3 id="迭代回顾与总结分析"><a href="#迭代回顾与总结分析" class="headerlink" title="迭代回顾与总结分析"></a>迭代回顾与总结分析</h3><p>ZenHub 也提供了 Burndown 和 Velocity tracking 图，可以得出这个迭代总体的完成情况，看看跟预期有何不同；也可以跟其他迭代进行对比，看看有何不同的地方，然后进行下一步的具体分析。</p>
+<p><img src="%E5%9F%BA%E4%BA%8E%20GitHub%20%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E4%B9%8B%E9%81%93%E4%B8%8E%E6%9C%AF/1480848185821.png" alt=""><br>还可以根据 GitHub 和 Toggl 里面的数据进行汇总和分析，下面这个表格就是我在 11 月这个迭代完成后一部分 issues 的具体 Estimation Points 和 Time Efforts，再结合 issues 里面所记录下的各种笔记和 references，就可以有一个比较直观的总结和复盘了。</p>
+<p>NUMBER &amp; DESCRIPTIONESTIMATION POINTSTIME EFFORTS <a href="https://github.com/JimmyLv/jimmylv.github.io/issues/85" target="_blank" rel="external">#85</a>  记录时间这件小事儿304:26:18 <a href="https://github.com/JimmyLv/jimmylv.github.io/issues/96" target="_blank" rel="external">#96</a>  如何对时间进行分类？803:00:09 <a href="https://github.com/JimmyLv/jimmylv.github.io/issues/102" target="_blank" rel="external">#102</a>  建立个人 Wiki 系统202:53:56 <a href="https://github.com/JimmyLv/jimmylv.github.io/issues/101" target="_blank" rel="external">#101</a>  技术雷达宣讲：enzyme 测试框架506:11:19 <a href="https://github.com/JimmyLv/jimmylv.github.io/issues/90" target="_blank" rel="external">#90</a>  Working time improvement133:27 min <a href="https://github.com/JimmyLv/jimmylv.github.io/issues/97" target="_blank" rel="external">#97</a>  如何使用 XX 的标签系统？125:21 min其他辅助工具</p>
+<ul>
+<li>看板：as Jira/ <a href="https://trello.com/" target="_blank" rel="external">Trello</a> ，可视化当前进度 =&gt; GitHub Issues group by @Projects / 日历 in @滴答清单；如果你不想用 ZenHub 可以试试  <a href="http://gitlo.co/" target="_blank" rel="external">Gitlo</a>  可以在 GitHub issues 和 Trello 之间进行双向同步。</li>
+<li>晨间日记 / 每日回顾：as Stand-Up，只用关注 Timeline/Done/Todo/Blocker 以及当天的心情 / 天气等等，使用 @ <a href="http://griddiaryapp.com/zh/" target="_blank" rel="external">格志日记</a> 的一个特点就是可以通过问答的方式对一天进行回顾。</li>
+<li>时间记录：@ <a href="http://timeblocks-simple-daily-activi.appstor.io/zh/" target="_blank" rel="external">时间块</a> 的优点在于记录非常得简单、快捷，用户评论最省时间的时间记录工具没有之一，推荐新手可以试试。但由于个人需要更加详细的记录细节和报告分析，以及多平台（包括 Chrome Extension）的支持，从而选择了 @ <a href="https://toggl.com/app/timer" target="_blank" rel="external">Toggl</a> 。</li>
+<li>白噪声：作为一款时间记录工具，@ <a href="https://toggl.com/app/timer" target="_blank" rel="external">Toggl</a>  本身就支持 Pomodoro 的 25 分钟提示，而作为专注力辅助的白噪声软件我在手机上用的 @ <a href="https://itunes.apple.com/tw/app/chao-xi-mei-hao-fan-jia-zhong/id1077776989?l=zh&amp;mt=8" target="_blank" rel="external">潮汐</a> ，电脑上则选择了 @ <a href="http://noiz.io/" target="_blank" rel="external">Noizio</a> 。<h2 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h2></li>
+</ul>
+<p>也许你很喜欢这个解决方案但又不太想公开自己的 issues 列表，那可以试试 GitHub 的 private repo（需要付费），免费的可以试试 GitLab，支持从 GitHub 一键导入，并且已经原生支持了 pipeline 和 kanban 功能。当然咯，不限于工具或软件，这一套方法论其实是可以运用在任何地方的，甚至于我们可以来做一个结合敏捷方法论的个人学习管理软件也不错嘛！</p>
+<p>但是于我而言，选择在 GitHub 这样一个公开环境下记录学习的最大一个动机就在于「开源」，很喜欢一句话，大意是「 <strong>在这个互联网时代，能限制住学习的只有你的求知欲</strong> 」。当你从互联网这个广阔的知识海洋当中汲取知识的时候，也应当有所输出到即反哺到整个互联网当中去。我会经常写博客 / 笔记来总结分享自己的所学，但是一篇文章诞生的背后往往还有很多其他知识和经验的相互交融与沉淀。 <a href="https://github.com/JimmyLv/jimmylv.github.io/issues" target="_blank" rel="external">Issues · JimmyLv/jimmylv.github.io</a>  这个列表里面的某个 issues 最终能否演变成一篇文章我不知道，但是基于 GitHub 开放式的学习历程都会被这些 issues 如实地记录着，任何一个想法都能追本溯源被找出最开始的缘由。</p>
+<blockquote>
+<p>相比于软件开发这件小事儿，健康快乐地成长显然要重要得多。—— 立青  </p>
+</blockquote>
+<p><a href="https://www.instapaper.com/read/928779585" target="_blank" rel="external">基于 GitHub 的敏捷学习方法之道与术</a></p>
+<p>#文章收藏</p>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Shadowsocks/" rel="tag">#Shadowsocks</a>
+          
+            <a href="/tags/Ubuntu/" rel="tag">#Ubuntu</a>
+          
+            <a href="/tags/GitHub/" rel="tag">#GitHub</a>
+          
+            <a href="/tags/敏捷学习方法/" rel="tag">#敏捷学习方法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/05/你不是Google，一语点醒技术人/" rel="next" title="你不是Google，一语点醒技术人">
+                <i class="fa fa-chevron-left"></i> 你不是Google，一语点醒技术人
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/07/10/基于 GitHub 的敏捷学习方法之道与术/"
+           data-title="基于 GitHub 的敏捷学习方法之道与术" data-url="http://yoursite.com/2017/07/10/基于 GitHub 的敏捷学习方法之道与术/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://cdn.bestxiaoyu.com/images/avatar.png"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">Kategorien</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+	<div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/donxyu" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/dongxy2010" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/donxyu" target="_blank">
+                  
+                    <i class="fa fa-global"></i> Zhihu
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/bestxiaoyu" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i> Twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/bestxiaoyu" target="_blank">
+                  
+                    <i class="fa fa-facebook"></i> Facebook
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.mofeiwo.com" target="_blank" rel="external nofollow">莫飞</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.bestxiaoyu.com" target="_blank" rel="external nofollow">程序员Assist</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#敏捷与个人成长"><span class="nav-number">1.</span> <span class="nav-text">敏捷与个人成长</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践之术"><span class="nav-number"></span> <span class="nav-text">实践之术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过-GitHub-Issues-收集需求"><span class="nav-number">1.</span> <span class="nav-text">通过 GitHub Issues 收集需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整理你的-GitHub-Issues"><span class="nav-number">2.</span> <span class="nav-text">整理你的 GitHub Issues</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计划与执行具体任务"><span class="nav-number">3.</span> <span class="nav-text">计划与执行具体任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代回顾与总结分析"><span class="nav-number">4.</span> <span class="nav-text">迭代回顾与总结分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后话"><span class="nav-number"></span> <span class="nav-text">后话</span></a></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script>
+    <script type="text/javascript">
+      jQuery(function() {          
+          jQuery("img").lazyload({
+            placeholder:"http://www.arao.me/loading.gif",
+              effect:"fadeIn"
+            });
+          });
+</script>
+
+<div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe | R&D Management . Web . Redis . Mysql . Linux . 负载均衡 . 高可用</span>
+</div>
+
+<!-- 
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+-->
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="powered-by">
+	<span id="busuanzi_container_site_pv">
+    	本站总访问量<span id="busuanzi_value_site_pv"></span>次
+	</span>
+</div>
+<div class="powered-by">
+	<span id="busuanzi_container_site_uv">
+  	您是本站第<span id="busuanzi_value_site_uv"></span>位访问者
+	</span>
+</div>
+
+<div class="powered-by">
+	<a id="translateLink" href="javascript:translatePage();">简繁切换</a>
+</div>
+
+苏ICP备15059861号
+
+
+<!--
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+-->
+
+<script type="text/javascript" src="http://cdn.bestxiaoyu.com/js/tw_cn.js"></script>
+<script type="text/javascript">
+var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+var cookieDomain = "http://www.arao.me/"; //Cookie地址, 一定要设定, 通常为你的网址
+var msgToTraditionalChinese = "简繁切换"; //此处可以更改为你想要显示的文字
+var msgToSimplifiedChinese = "簡繁切換"; //同上，但两处均不建议更改
+var translateButtonId = "translateLink"; //默认互换id
+translateInitilization();
+</script>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+       if (CONFIG.sidebar === 'post') {
+         if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+         }
+       }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"bestxiaoyu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//bestxiaoyu.com/js/embed.js';	
+      ds.charset = 'UTF-8';
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("Dpy90j5mSLtwiTTwpqxzi6vJ-gzGzoHsz", "o5pHqk9F8jwhRlqdBPdBxLiE");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+</body>
+</html>
